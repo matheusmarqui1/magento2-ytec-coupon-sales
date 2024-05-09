@@ -112,6 +112,7 @@ php bin/magento cache:clean
 - **GET /V1/ytec/coupon-sales/{couponCode}**: Get a coupon sale by code.
 - **PUT /V1/ytec/coupon-sales/{couponCode}/disable**: Disable a coupon sale by code. The coupon can't be used anymore and will get the status "Disabled by partner".
 - **DELETE /V1/ytec/coupon-sales/{couponCode}**: Delete a coupon sale by code. The coupon will be deleted from the database, if it's not used. If the configuration indicates as soft delete, the request will be processed as a disable request.
+![Coupon Sales Delete Endpoint Config](https://i.imgur.com/IF6AQP1.png)
 
 ## License
 
