@@ -69,7 +69,7 @@ php bin/magento cache:clean
 1. **Access the Admin Panel**: Go to your Magento 2 Admin Panel.
 2. **Navigate to Sales Rules**: Go to `Marketing > Promotions > Cart Price Rules > New`.
 3. **Create a New Rule**: Create a new rule and mark it as "Coupon Sales" with the new configuration under "Partnership Sales".
-4. **Choose a code template**: Choose a code template for your partners to create coupons (you can turn code template validation off in the configuration Stores > Configuration > Ytec > Coupon Sales > General).
+4. **Choose a code template**: Choose a code template for your partners to create coupons (you can turn code template validation off in the configuration Stores > Configuration > Ytec > Coupon Sales > General > Validate Coupon Sales Code Templates).
 ![Code Template](https://i.imgur.com/Oh5ZQvh.png)
 5. **Save the Rule**: Save the rule and get the rule's ID.
 6. **Create a Coupon**: Your partners can create coupons using the Magento 2 endpoint `POST /V1/ytec/coupon-sales/coupons` with the following payload:
@@ -98,6 +98,13 @@ php bin/magento cache:clean
 
 7. **Use the Coupon**: Customers can use the coupon code to apply the rule's discount (coupon sales can be used only once).
 8. **Manage Coupons**: You can manage the coupons created by your partners in the grid `Ytec > Coupon Sales > Manage Coupon Sales`.
+![Manage Coupon Sales](https://i.imgur.com/YdUktLn.png)
+- The grid shows the coupon code, the rule's name, the partner's sales price, the expiration date, the status and more.
+- You can disable, delete and create coupons sales in the grid.
+- You can also see the coupon's usage history by clicking on edit on a coupon sale.
+- The partner name is deduced automatically by the partner's API key.
+- The Sales ID is automatically deduced by the coupon sale's code and based on a regex that you can define in Stores > Configuration > Ytec > Coupon Sales > General > Sales ID Regex.
+![Coupon Sales Configuration](https://i.imgur.com/H2WkSTH.png)
 
 
 ## Other Endpoints
