@@ -10,25 +10,25 @@
 -->
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <route url="/V1/partner/voucher/:code" method="GET">
+    <route url="/V1/ytec/coupon-sales/:code" method="GET">
         <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="getByCode"/>
         <resources>
             <resource ref="Ytec_CouponSales::management"/>
         </resources>
     </route>
-    <route url="/V1/partner/voucher/:code" method="DELETE">
+    <route url="/V1/ytec/coupon-sales/:code" method="DELETE">
         <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="deleteByCode"/>
         <resources>
             <resource ref="Ytec_CouponSales::management"/>
         </resources>
     </route>
-    <route url="/V1/partner/voucher/:code/disable" method="PUT">
+    <route url="/V1/ytec/coupon-sales/:code/disable" method="PUT">
         <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="disableByCode"/>
         <resources>
             <resource ref="Ytec_CouponSales::management"/>
         </resources>
     </route>
-    <route url="/V1/partner/voucher-collection" method="POST">
+    <route url="/V1/ytec/coupon-sales/coupons" method="POST">
         <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="createCouponSales"/>
         <resources>
             <resource ref="Ytec_CouponSales::management"/>

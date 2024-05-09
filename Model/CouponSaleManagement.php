@@ -144,7 +144,7 @@ class CouponSaleManagement implements CouponSaleManagementInterface
     /**
      * {@inheritdoc}
      */
-    public function createCouponSales(array $CouponSales): RestResponseInterface
+    public function createCouponSales(array $couponSales): RestResponseInterface
     {
         if (!$this->moduleConfiguration->isEnabled() || !$this->moduleConfiguration->isCreateVoucherEndpointEnabled()) {
             return $this->restResponse->forbidden([
@@ -152,7 +152,7 @@ class CouponSaleManagement implements CouponSaleManagementInterface
             ]);
         }
 
-        foreach ($CouponSales as $couponSale) {
+        foreach ($couponSales as $couponSale) {
             try {
                 $couponSale
                     ->setPartnerName($this->partnerName->getPartnerNameFromRequest())

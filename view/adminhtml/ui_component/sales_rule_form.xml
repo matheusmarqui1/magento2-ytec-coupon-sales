@@ -13,7 +13,7 @@
         <fieldset name="partner_couponsale_sales" sortOrder="10">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Partner GiftCard Sales</item>
+                    <item name="label" xsi:type="string" translate="true">Partnership Sales</item>
                     <item name="collapsible" xsi:type="boolean">true</item>
                     <item name="opened" xsi:type="boolean">false</item>
                     <item name="sortOrder" xsi:type="number">6000</item>
@@ -28,7 +28,7 @@
                 </argument>
                 <settings>
                     <dataType>boolean</dataType>
-                    <label translate="true">Mark as Coupon Sale Sales Rule</label>
+                    <label translate="true">Mark as Coupon Sale Rule</label>
                 </settings>
                 <formElements>
                     <checkbox>
@@ -50,7 +50,7 @@
                 </argument>
                 <settings>
                     <dataType>text</dataType>
-                    <label translate="true">CouponSale Coupon Template</label>
+                    <label translate="true">Coupon Sale Template</label>
                     <dataScope>couponsale_coupon_template</dataScope>
                     <notice translate="true">{L} - letter, {D} - digit e.g. PROMO_{L}{L}{D}{D}{D} results in PROMO_DF627. Recommended code length is 20 symbols. This is used to validate the received code by the partner.
                     </notice>

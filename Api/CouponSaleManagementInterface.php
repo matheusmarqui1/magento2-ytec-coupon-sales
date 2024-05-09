@@ -52,8 +52,8 @@ interface CouponSaleManagementInterface
 
     /**
      * Create Coupon Sales.
-     * @param \Ytec\CouponSales\Api\Data\CouponSaleInterface[] $CouponSales
+     * @param \Ytec\CouponSales\Api\Data\CouponSaleInterface[] $couponSales
      * @return \Ytec\Base\Api\Rest\RestResponseInterface
      */
-    public function createCouponSales(array $CouponSales): \Ytec\Base\Api\Rest\RestResponseInterface;
+    public function createCouponSales(array $couponSales): \Ytec\Base\Api\Rest\RestResponseInterface;
 }
