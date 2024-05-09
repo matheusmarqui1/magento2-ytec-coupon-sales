@@ -4,7 +4,7 @@
  *
  * @package    Ytec
  * @moduleName CouponSales
- * @author     Matheus Marqui (matheus.marqui@photoweb.fr)
+ * @author     Matheus Marqui (matheus.701@live.com)
  */
 declare(strict_types=1);
 
