@@ -28,7 +28,7 @@
                 </field>
                 <field id="sales_id_regex" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sales ID Regex</label>
-                    <comment>Regex to validate extract the Sales ID sent by partner.</comment>
+                    <comment>Regex to extract the Sales ID sent by partner.</comment>
                 </field>
             </group>
             <group id="endpoints" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
