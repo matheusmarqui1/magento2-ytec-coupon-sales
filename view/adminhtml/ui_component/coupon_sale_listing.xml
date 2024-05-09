@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright © 2024 Ytec. All rights reserved.
+*
+* @package    Ytec
+* @moduleName CouponSales
+* @author     Matheus Marqui <matheus.701@live.com>
+*/
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">coupon_sale_listing.coupon_sale_listing_data_source</item>
+            <item name="deps" xsi:type="string">coupon_sale_listing.coupon_sale_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New</label>
+            </button>
+        </buttons>
+        <spinner>coupon_sale_listing_columns</spinner>
+        <deps>
+            <dep>coupon_sale_listing.coupon_sale_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="coupon_sale_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Ytec_CouponSales::management</aclResource>
+        <dataProvider class="Ytec\CouponSales\Ui\DataProvider\CouponSaleDataProvider" name="coupon_sale_listing_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="coupon_sale_listing_columns">
+        <column name="entity_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="rule_id" component="Ytec_CouponSales/js/grid/columns/rule">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Rule</label>
+                <dataType>select</dataType>
+                <options class="Ytec\CouponSales\Model\Config\Source\Rule"/>
+            </settings>
+        </column>
+        <column name="status" component="Ytec_CouponSales/js/grid/columns/status">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Status</label>
+                <dataType>select</dataType>
+                <options class="Ytec\CouponSales\Model\Config\Source\Status"/>
+            </settings>
+        </column>
+        <column name="code">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Code</label>
+            </settings>
+        </column>
+        <column name="partner_name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Partner Name</label>
+            </settings>
+        </column>
+        <column name="partner_sales_price" class="Magento\Sales\Ui\Component\Listing\Column\Price">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Partner Sales Price</label>
+                <dataType>price</dataType>
+            </settings>
+        </column>
+        <column name="sales_id" class="Ytec\CouponSales\Ui\Component\Listing\Column\SalesId">
+            <settings>
+                <label translate="true">Sales ID</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Created At</label>
+                <dataType>date</dataType>
+            </settings>
+        </column>
+        <column name="expires_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Expires At</label>
+                <dataType>date</dataType>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Ytec\CouponSales\Ui\Component\Listing\Column\CouponSaleBlockActions">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

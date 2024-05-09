@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright © 2024 Ytec. All rights reserved.
+*
+* @package    Ytec
+* @moduleName CouponSales
+* @author     Matheus Marqui <matheus.701@live.com>
+*/
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="ytec_couponsale" resource="default" engine="innodb" comment="GiftCard">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity Id Column"/>
+        <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Rule Id Column"/>
+        <column xsi:type="int" name="code_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Code Id Column"/>
+        <column xsi:type="varchar" name="code" nullable="false" length="255"
+                comment="Code Column"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="255"
+                comment="Status Column"/>
+        <column xsi:type="varchar" name="partner_name" nullable="true" length="255"
+                comment="Partner Name Column"/>
+        <column xsi:type="decimal" name="partner_sales_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Partner Sales Price Column"/>
+        <column xsi:type="datetime" name="created_at" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At Column"/>
+        <column xsi:type="datetime" name="expires_at" nullable="true" default="NULL"
+                comment="Expires At Column"/>
+        <column xsi:type="text" name="history" nullable="true" comment="History Column"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="YTEC_COUPONSALE_ENTITY_ID" indexType="btree">
+            <column name="entity_id"/>
+        </index>
+        <index referenceId="YTEC_COUPONSALE_RULE_ID" indexType="btree">
+            <column name="rule_id"/>
+        </index>
+        <constraint xsi:type="unique" referenceId="YTEC_COUPONSALE_CODE">
+            <column name="code"/>
+            <column name="code_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="YTEC_COUPONSALE_RULE_ID_SALESRULE_RULE_ID" table="ytec_couponsale" column="rule_id"
+                    referenceTable="salesrule" referenceColumn="rule_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="YTEC_COUPONSALE_CODE_ID_SALESRULE_COUPON_COUPON_ID" table="ytec_couponsale" column="code_id"
+                    referenceTable="salesrule_coupon" referenceColumn="coupon_id" onDelete="CASCADE"/>
+    </table>
+    <table name="salesrule">
+        <column xsi:type="int" name="is_partner_sales_rule" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Is Partner Sales Rule Column"/>
+        <column xsi:type="varchar" name="couponsale_coupon_template" nullable="false" length="255" comment="CouponSale Coupon Template Column"/>
+    </table>
+</schema>

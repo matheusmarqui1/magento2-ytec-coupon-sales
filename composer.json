@@ -1,0 +1,21 @@
+{
+  "name": "ytec/module-gift-cards",
+  "version": "1.0.0",
+  "description": "Provides Coupon Sale functionalities for Coupon Sales and integration to partners Coupon Sale sales.",
+  "type": "magento2-module",
+  "require": {
+    "magento/framework": "*",
+    "ytec/base": "1.0.*"
+  },
+  "license": [
+    "Proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Ytec\\CouponSales\\": ""
+    }
+  }
+}

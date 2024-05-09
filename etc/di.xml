@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright © 2024 Ytec. All rights reserved.
+*
+* @package    Ytec
+* @moduleName CouponSales
+* @author     Matheus Marqui <matheus.701@live.com>
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Ytec\CouponSales\Api\Data\CouponSaleInterface"
+                type="Ytec\CouponSales\Model\Data\CouponSaleData"/>
+    <preference for="Ytec\CouponSales\Api\CouponSaleSaveValidatorInterface"
+                type="Ytec\CouponSales\Model\Validator\CouponSaleSaveValidator"/>
+    <preference for="Ytec\CouponSales\Api\CodeTemplateValidatorInterface"
+                type="Ytec\CouponSales\Model\Validator\CodeTemplateValidator"/>
+    <preference for="Magento\SalesRule\Api\Data\RuleInterface"
+                type="Ytec\CouponSales\Api\Data\RuleInterface"/>
+    <preference for="Ytec\CouponSales\Api\Data\RuleInterface"
+                type="Ytec\CouponSales\Model\Data\Rule"/>
+    <preference for="Ytec\CouponSales\Api\CouponSaleRepositoryInterface"
+                type="Ytec\CouponSales\Model\CouponSaleRepository"/>
+    <preference for="Ytec\CouponSales\Api\CouponSaleManagementInterface"
+                type="Ytec\CouponSales\Model\CouponSaleManagement"/>
+    <preference for="Ytec\CouponSales\Api\ModuleConfigurationInterface"
+                type="Ytec\CouponSales\Model\Config\ModuleConfiguration"/>
+</config>

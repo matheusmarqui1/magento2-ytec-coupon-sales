@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright © 2024 Ytec. All rights reserved.
+*
+* @package    Ytec
+* @moduleName CouponSales
+* @author     Matheus Marqui <matheus.701@live.com>
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ytec_couponsales" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Coupon Sales</label>
+            <tab>ytec</tab>
+            <resource>Ytec_CouponSales::management</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="validate_templates" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Validate Coupon Sales Templates</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Validate if the Coupon Sale sent by partner matches the rule code's template.</comment>
+                </field>
+                <field id="sales_id_regex" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sales ID Regex</label>
+                    <comment>Regex to validate extract the Sales ID sent by partner.</comment>
+                </field>
+            </group>
+            <group id="endpoints" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>API Endpoints</label>
+                <group id="create_voucher" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Create Voucher</label>
+                    <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[Enable the endpoint to create a voucher. <strong>POST /V1/partner/voucher-collection</strong>]]></comment>
+                    </field>
+                </group>
+                <group id="get_voucher" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Get Voucher</label>
+                    <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[Enable the endpoint to get a voucher. <strong>GET /V1/partner/voucher/:code</strong>]]></comment>
+                    </field>
+                </group>
+                <group id="delete_voucher" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delete Voucher</label>
+                    <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[Enable the endpoint to delete a voucher. <strong>DELETE /V1/partner/voucher/:code</strong>]]></comment>
+                    </field>
+                    <field id="soft_delete" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Soft Delete</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Soft delete the voucher instead of hard delete. The requests made to this endpoint will be mapped to disable voucher endpoint.</comment>
+                    </field>
+                </group>
+                <group id="disable_voucher" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Voucher</label>
+                    <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[Enable the endpoint to disable a voucher. <strong>PUT /V1/partner/voucher/:code/disable</strong>]]></comment>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

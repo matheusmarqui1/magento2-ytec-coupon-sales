@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright © 2024 Ytec. All rights reserved.
+*
+* @package    Ytec
+* @moduleName CouponSales
+* @author     Matheus Marqui <matheus.701@live.com>
+*/
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">coupon_sale_form.coupon_sale_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Coupon Sale Creation</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <namespace>coupon_sale_form</namespace>
+        <dataScope>data.general</dataScope>
+        <deps>
+            <dep>coupon_sale_form.coupon_sale_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="save" class="Ytec\CouponSales\Block\Form\CouponSale\Save"/>
+            <button name="back" class="Ytec\CouponSales\Block\Form\CouponSale\Back"/>
+            <button name="delete" class="Ytec\CouponSales\Block\Form\CouponSale\Delete"/>
+        </buttons>
+    </settings>
+    <dataSource name="coupon_sale_form_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="ytec_couponsales/couponsale/save"/>
+        </settings>
+        <dataProvider class="Ytec\CouponSales\Ui\DataProvider\CouponSaleDataProvider" name="coupon_sale_form_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label translate="true">General</label>
+        </settings>
+        <field name="entity_id" sortOrder="0" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Entity ID</label>
+                <dataScope>entity_id</dataScope>
+            </settings>
+        </field>
+        <field name="rule_id" sortOrder="00" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">rule_id</item>
+                </item>
+                <item name="options" xsi:type="object">Ytec\CouponSales\Model\Config\Source\Rule</item>
+            </argument>
+            <settings>
+                <dataType>int</dataType>
+                <label translate="true">Coupon Sale Rule</label>
+                <dataScope>rule_id</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <notice translate="true">
+                    Select the related rule of Coupon Sale. Only sales rules marked as Coupon Sale Rule are shown.
+                </notice>
+            </settings>
+        </field>
+        <field name="status" sortOrder="20" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">status</item>
+                </item>
+                <item name="options" xsi:type="object">Ytec\CouponSales\Model\Config\Source\Status</item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Status</label>
+                <dataScope>status</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <notice translate="true">Select the status of the Coupon Sale.</notice>
+            </settings>
+        </field>
+        <field name="code" sortOrder="25" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">code</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Code</label>
+                <dataScope>code</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <notice translate="true">Enter the code of the Coupon Sale. It must be compliant with the selected rule coupon's template.</notice>
+            </settings>
+        </field>
+        <field name="partner_name" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">partner_name</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Partner Name</label>
+                <dataScope>partner_name</dataScope>
+            </settings>
+        </field>
+        <field name="partner_sales_price" sortOrder="40" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">partner_sales_price</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>int</dataType>
+                <label translate="true">Partner Sales Price</label>
+                <dataScope>partner_sales_price</dataScope>
+            </settings>
+        </field>
+        <field name="expires_at" sortOrder="50" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">expires_at</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">dd/MM/yyyy</item>
+                        <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>date</dataType>
+                <label translate="true">Expires At</label>
+                <dataScope>expires_at</dataScope>
+                <notice translate="true">Enter the expiration date of the Coupon Sale.</notice>
+            </settings>
+        </field>
+        <fieldset name="history_fieldset">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">History</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="opened" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="history" sortOrder="20">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="formElement" xsi:type="string">textarea</item>
+                        <item name="cols" xsi:type="number">20</item>
+                        <item name="rows" xsi:type="number">6</item>
+                        <item name="source" xsi:type="string">history</item>
+                        <item name="disabled" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">History</label>
+                    <dataScope>history</dataScope>
+                    <notice translate="true">Coupon Sale history.</notice>
+                </settings>
+            </field>
+        </fieldset>
+    </fieldset>
+</form>

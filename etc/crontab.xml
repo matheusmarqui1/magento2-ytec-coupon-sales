@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="ytec_CouponSales_set_gift_card_status_to_expired"
+             instance="Ytec\CouponSales\Cron\SetCouponSaleStatusToExpired" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,18 @@
+{
+  "ytec_couponsale": {
+    "column": {
+      "entity_id": true,
+      "rule_id": true,
+      "code_id": true,
+      "status": true,
+      "partner_name": true,
+      "partner_sales_price": true
+    },
+    "index": {
+      "YTEC_GIFTCARD_ENTITY_ID": true
+    },
+    "constraint": {
+      "PRIMARY": true
+    }
+  }
+}
