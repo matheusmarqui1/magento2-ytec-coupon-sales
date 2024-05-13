@@ -90,10 +90,10 @@ class SetCouponSaleStatusToExpired
             ->create())
         ->create();
 
-        $CouponSales = $this->couponSaleRepository->getList($searchCriteria)->getItems();
+        $couponSales = $this->couponSaleRepository->getList($searchCriteria)->getItems();
 
         /** @var CouponSaleInterface|CouponSaleModel $giftCard */
-        foreach ($CouponSales as $giftCard) {
+        foreach ($couponSales as $giftCard) {
             $updatedCouponSale = $this->couponSaleFactory->create()
                 ->addData($giftCard->getData())
                 ->addHistoryLine(
