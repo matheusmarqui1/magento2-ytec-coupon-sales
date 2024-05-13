@@ -82,18 +82,18 @@ class SetCouponSaleStatusToExpired
                 ->setField(CouponSaleInterface::EXPIRES_AT)
                 ->setConditionType('lt')
                 ->setValue(date('Y-m-d H:i:s'))
-            ->create()
-        )
-            ->create();
+            ->create())->addFilter(
+            $this->filterBuilder
+                ->setField(CouponSaleInterface::STATUS)
+                ->setConditionType('eq')
+                ->setValue(Status::AVAILABLE
+            )->create())
+        ->create();
 
         $CouponSales = $this->couponSaleRepository->getList($searchCriteria)->getItems();
 
         /** @var CouponSaleInterface|CouponSaleModel $giftCard */
         foreach ($CouponSales as $giftCard) {
-            if ($giftCard->getStatus() !== Status::AVAILABLE) {
-                continue;
-            }
-
             $updatedCouponSale = $this->couponSaleFactory->create()
                 ->addData($giftCard->getData())
                 ->addHistoryLine(
