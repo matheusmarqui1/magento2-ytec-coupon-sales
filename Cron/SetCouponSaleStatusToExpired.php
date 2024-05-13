@@ -86,8 +86,8 @@ class SetCouponSaleStatusToExpired
             $this->filterBuilder
                 ->setField(CouponSaleInterface::STATUS)
                 ->setConditionType('eq')
-                ->setValue(Status::AVAILABLE
-            )->create())
+                ->setValue(Status::AVAILABLE)
+            ->create())
         ->create();
 
         $CouponSales = $this->couponSaleRepository->getList($searchCriteria)->getItems();
