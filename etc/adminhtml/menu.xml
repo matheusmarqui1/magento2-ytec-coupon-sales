@@ -14,5 +14,11 @@
         <add id="Ytec_CouponSales::management" sortOrder="100" title="Coupon Sale Management" module="Ytec_CouponSales"
              parent="Ytec_Base::ytec_menu" resource="Ytec_CouponSales::management" translate="title"
              action="ytec_couponsales/couponsale/index"/>
+        <add id="Ytec_CouponSales::promo_couponsales" title="Coupon Sales" translate="title" module="Ytec_CouponSales"
+             parent="Magento_Backend::marketing" sortOrder="100" resource="Ytec_CouponSales::management"/>
+        <add id="Ytec_CouponSales::promo_couponsales_management" title="Manage Coupon Sales" translate="title"
+             sortOrder="10" module="Ytec_CouponSales" parent="Ytec_CouponSales::promo_couponsales"
+             action="ytec_couponsales/couponsale/index" dependsOnModule="Ytec_CouponSales"
+             resource="Ytec_CouponSales::management"/>
     </menu>
 </config>

@@ -10,15 +10,19 @@ declare(strict_types=1);
 
 namespace Ytec\CouponSales\Plugin;
 
+use Magento\Framework\DataObject;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\OrderExtensionFactory;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderSearchResultInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Ytec\CouponSales\Api\Data\CouponSaleInterface;
-use Ytec\CouponSales\Api\Data\CouponSaleInterfaceFactory;
+use Ytec\CouponSales\Api\Data\CouponSaleOrderInterface;
+use Ytec\CouponSales\Api\Data\CouponSaleOrderInterfaceFactory;
 use Ytec\CouponSales\Api\CouponSaleRepositoryInterface;
+use Ytec\CouponSales\Model\CouponSaleModel;
 use Ytec\CouponSales\Ui\Component\Listing\Column\SalesId;
+use Ytec\CouponSales\Helper\ProductDiscountUsage;
 
 class AddCouponSaleDataToOrdersApi
 {
@@ -33,9 +37,9 @@ class AddCouponSaleDataToOrdersApi
     private OrderExtensionFactory $orderExtensionFactory;
 
     /**
-     * @var CouponSaleInterfaceFactory
+     * @var CouponSaleOrderInterfaceFactory
      */
-    private CouponSaleInterfaceFactory $couponSaleFactory;
+    private CouponSaleOrderInterfaceFactory $couponSaleOrderFactory;
 
     /**
      * @var SalesId
@@ -43,20 +47,28 @@ class AddCouponSaleDataToOrdersApi
     private SalesId $salesId;
 
     /**
+     * @var ProductDiscountUsage
+     */
+    private ProductDiscountUsage $productDiscountUsage;
+
+    /**
      * @param CouponSaleRepositoryInterface $couponSaleRepository
      * @param OrderExtensionFactory $orderExtensionFactory
-     * @param CouponSaleInterfaceFactory $couponSaleFactory
+     * @param CouponSaleOrderInterfaceFactory $couponSaleOrderFactory
+     * @param ProductDiscountUsage $productDiscountUsage
      * @param SalesId $salesId
      */
     public function __construct(
         CouponSaleRepositoryInterface $couponSaleRepository,
         OrderExtensionFactory $orderExtensionFactory,
-        CouponSaleInterfaceFactory $couponSaleFactory,
+        CouponSaleOrderInterfaceFactory $couponSaleOrderFactory,
+        ProductDiscountUsage $productDiscountUsage,
         SalesId $salesId
     ) {
         $this->couponSaleRepository = $couponSaleRepository;
         $this->orderExtensionFactory = $orderExtensionFactory;
-        $this->couponSaleFactory = $couponSaleFactory;
+        $this->couponSaleOrderFactory = $couponSaleOrderFactory;
+        $this->productDiscountUsage = $productDiscountUsage;
         $this->salesId = $salesId;
     }
 
@@ -70,15 +82,20 @@ class AddCouponSaleDataToOrdersApi
     {
         if ($couponCode = $result->getCouponCode()) {
             try {
+                /** @var CouponSaleInterface|CouponSaleModel $couponSale */
                 if ($couponSale = $this->couponSaleRepository->getCouponSaleByCode($couponCode)) {
                     $orderExtensionAttributes = $result->getExtensionAttributes();
                     if ($orderExtensionAttributes === null) {
                         $orderExtensionAttributes = $this->orderExtensionFactory->create();
                     }
-                    /** @var CouponSaleInterface $couponSale */
-                    $couponSale = $this->couponSaleFactory->create()
+                    /** @var CouponSaleOrderInterface|DataObject $couponSale */
+                    $couponSale = $this->couponSaleOrderFactory->create()
                         ->addData($couponSale->getData())
-                        ->setSalesId($this->salesId->getSalesId($couponCode));
+                        ->setData(CouponSaleOrderInterface::SALES_ID, $this->salesId->getSalesId($couponCode))
+                        ->setData(
+                            CouponSaleOrderInterface::PRODUCT_DISCOUNT_USAGE,
+                            $this->productDiscountUsage->execute($result, (int)$couponSale->getRuleId())
+                        );
                     $orderExtensionAttributes->setCouponSale($couponSale);
                     $result->setExtensionAttributes($orderExtensionAttributes);
                 }
