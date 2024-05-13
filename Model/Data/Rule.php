@@ -30,12 +30,12 @@ class Rule extends MagentoRule implements RuleInterface
         return $this->setData(self::IS_PARTNER_SALES_RULE, $isPartnerSalesRule);
     }
 
-    public function getGiftCardCouponTemplate(): ?string
+    public function getCouponSaleCouponTemplate(): ?string
     {
         return $this->_get(self::GIFTCARD_COUPON_TEMPLATE);
     }
 
-    public function setGiftCardCouponTemplate(string $giftCardCouponTemplate): RuleInterface
+    public function setCouponSaleCouponTemplate(string $giftCardCouponTemplate): RuleInterface
     {
         return $this->setData(self::GIFTCARD_COUPON_TEMPLATE, $giftCardCouponTemplate);
     }

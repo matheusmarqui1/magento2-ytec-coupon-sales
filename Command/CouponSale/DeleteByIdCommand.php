@@ -21,8 +21,8 @@ use Ytec\CouponSales\Model\ResourceModel\CouponSaleResource;
 
 /**
  * Class DeleteByIdCommand
- * @package Ytec\CouponSales\Command\GiftCard
- * Delete GiftCard by id.
+ * @package Ytec\CouponSales\Command\CouponSale
+ * Delete CouponSale by id.
  */
 class DeleteByIdCommand
 {
@@ -65,7 +65,7 @@ class DeleteByIdCommand
     }
 
     /**
-     * Delete GiftCard.
+     * Delete CouponSale.
      *
      * @param int $entityId
      *
@@ -82,7 +82,7 @@ class DeleteByIdCommand
             if (!$model->getData(CouponSaleInterface::ENTITY_ID)) {
                 throw new NoSuchEntityException(
                     __(
-                        'Could not find GiftCard with id: `%id`',
+                        'Could not find CouponSale with id: `%id`',
                         [
                             'id' => $entityId
                         ]
@@ -93,13 +93,13 @@ class DeleteByIdCommand
             $this->deleteCommand->execute($model);
         } catch (Exception $exception) {
             $this->logger->error(
-                __('Could not delete GiftCard. Original message: {message}'),
+                __('Could not delete CouponSale. Original message: {message}'),
                 [
                     'message' => $exception->getMessage(),
                     'exception' => $exception
                 ]
             );
-            throw new CouldNotDeleteException(__('Could not delete GiftCard.'));
+            throw new CouldNotDeleteException(__('Could not delete CouponSale.'));
         }
     }
 }

@@ -22,9 +22,9 @@ use Ytec\CouponSales\Api\Data\CouponSaleInterface;
 use Ytec\CouponSales\Query\CouponSale\GetListQuery;
 
 /**
- * Class GiftCardDataProvider
+ * Class CouponSaleDataProvider
  * @package Ytec\CouponSales\Ui\DataProvider
- * GiftCard data provider.
+ * CouponSale data provider.
  */
 class CouponSaleDataProvider extends DataProvider
 {

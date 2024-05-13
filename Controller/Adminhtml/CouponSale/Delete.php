@@ -23,8 +23,8 @@ use Ytec\CouponSales\Command\CouponSale\DeleteByIdCommand;
 
 /**
  * Class Delete
- * @package Ytec\CouponSales\Controller\Adminhtml\GiftCard
- * Delete GiftCard action controller.
+ * @package Ytec\CouponSales\Controller\Adminhtml\CouponSale
+ * Delete CouponSale action controller.
  */
 class Delete extends BackendAction implements HttpPostActionInterface, HttpGetActionInterface
 {
@@ -53,7 +53,7 @@ class Delete extends BackendAction implements HttpPostActionInterface, HttpGetAc
     }
 
     /**
-     * Delete GiftCard action.
+     * Delete CouponSale action.
      *
      * @return ResultInterface
      * @noinspection PhpPossiblePolymorphicInvocationInspection

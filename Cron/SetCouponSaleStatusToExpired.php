@@ -94,7 +94,7 @@ class SetCouponSaleStatusToExpired
                 continue;
             }
 
-            $updatedGiftCard = $this->couponSaleFactory->create()
+            $updatedCouponSale = $this->couponSaleFactory->create()
                 ->addData($giftCard->getData())
                 ->addHistoryLine(
                     __(
@@ -104,7 +104,7 @@ class SetCouponSaleStatusToExpired
                 )->setStatus(Status::EXPIRED);
 
             try {
-                $this->couponSaleRepository->save($updatedGiftCard);
+                $this->couponSaleRepository->save($updatedCouponSale);
             } catch (\Exception $exception) {
                 $this->logger->error(
                     __(

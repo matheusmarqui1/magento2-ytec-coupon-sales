@@ -14,9 +14,9 @@ use Magento\Framework\Model\AbstractModel;
 use Ytec\CouponSales\Model\ResourceModel\CouponSaleResource;
 
 /**
- * Class GiftCardModel
+ * Class CouponSaleModel
  * @package Ytec\CouponSales\Model
- * GiftCard model.
+ * CouponSale model.
  */
 class CouponSaleModel extends AbstractModel
 {

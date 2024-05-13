@@ -10,7 +10,7 @@
 -->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="ytec_couponsale" resource="default" engine="innodb" comment="GiftCard">
+    <table name="ytec_couponsale" resource="default" engine="innodb" comment="CouponSale">
         <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
                 comment="Entity Id Column"/>
         <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false" identity="false"

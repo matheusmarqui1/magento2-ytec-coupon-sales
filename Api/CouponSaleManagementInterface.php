@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Ytec\CouponSales\Api;
 
 /**
- * Interface GiftCardManagementInterface
+ * Interface CouponSaleManagementInterface
  * @package Ytec\CouponSales\Api
  * @api
  */

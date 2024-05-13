@@ -16,8 +16,8 @@ use Ytec\CouponSales\Api\Data\CouponSaleInterface;
 
 /**
  * Class GenericButton
- * @package Ytec\CouponSales\Block\Form\GiftCard
- * Generic button for GiftCard form.
+ * @package Ytec\CouponSales\Block\Form\CouponSale
+ * Generic button for CouponSale form.
  */
 class GenericButton
 {
@@ -42,7 +42,7 @@ class GenericButton
     }
 
     /**
-     * Get GiftCard entity id.
+     * Get CouponSale entity id.
      *
      * @return int
      */

@@ -18,8 +18,8 @@ use Magento\Framework\Controller\ResultInterface;
 
 /**
  * Class Index
- * @package Ytec\CouponSales\Controller\Adminhtml\GiftCard
- * GiftCard list controller.
+ * @package Ytec\CouponSales\Controller\Adminhtml\CouponSale
+ * CouponSale list controller.
  */
 class Index extends BackendAction implements HttpGetActionInterface
 {

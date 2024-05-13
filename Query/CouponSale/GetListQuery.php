@@ -21,8 +21,8 @@ use Ytec\CouponSales\Model\ResourceModel\CouponSaleModel\CouponSaleCollectionFac
 
 /**
  * Class GetListQuery
- * @package Ytec\CouponSales\Query\GiftCard
- * Get GiftCard list query.
+ * @package Ytec\CouponSales\Query\CouponSale
+ * Get CouponSale list query.
  */
 class GetListQuery
 {
@@ -73,7 +73,7 @@ class GetListQuery
     }
 
     /**
-     * Get GiftCard list by search criteria.
+     * Get CouponSale list by search criteria.
      *
      * @param SearchCriteriaInterface|null $searchCriteria
      *

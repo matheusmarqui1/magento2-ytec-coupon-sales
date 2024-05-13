@@ -17,8 +17,8 @@ use Magento\Framework\Controller\ResultFactory;
 
 /**
  * Class NewAction
- * @package Ytec\CouponSales\Controller\Adminhtml\GiftCard
- * Create new GiftCard controller.
+ * @package Ytec\CouponSales\Controller\Adminhtml\CouponSale
+ * Create new CouponSale controller.
  */
 class NewAction extends BackendAction implements HttpGetActionInterface
 {
@@ -30,7 +30,7 @@ class NewAction extends BackendAction implements HttpGetActionInterface
     public const ADMIN_RESOURCE = 'Ytec_CouponSales::management';
 
     /**
-     * Create new GiftCard action.
+     * Create new CouponSale action.
      *
      * @return Page
      */

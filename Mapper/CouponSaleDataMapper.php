@@ -17,9 +17,9 @@ use Ytec\CouponSales\Api\Data\CouponSaleInterfaceFactory;
 use Ytec\CouponSales\Model\CouponSaleModel;
 
 /**
- * Class GiftCardDataMapper
+ * Class CouponSaleDataMapper
  * @package Ytec\CouponSales\Mapper
- * GiftCard data mapper.
+ * CouponSale data mapper.
  */
 class CouponSaleDataMapper
 {

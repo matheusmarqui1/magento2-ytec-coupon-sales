@@ -23,7 +23,7 @@ use Ytec\CouponSales\Model\Config\Source\Status;
 use Ytec\CouponSales\Model\Data\CouponSaleData;
 
 /**
- * Class GiftCardManagement
+ * Class CouponSaleManagement
  * @package Ytec\CouponSales\Model
  */
 class CouponSaleManagement implements CouponSaleManagementInterface
@@ -59,7 +59,7 @@ class CouponSaleManagement implements CouponSaleManagementInterface
     private ModuleConfigurationInterface $moduleConfiguration;
 
     /**
-     * GiftCardManagement constructor.
+     * CouponSaleManagement constructor.
      * @param RestResponseInterface $restResponse
      * @param CouponSaleRepositoryInterface $couponsaleRepository
      * @param LoggerInterface $logger

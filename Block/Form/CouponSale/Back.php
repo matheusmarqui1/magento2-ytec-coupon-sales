@@ -13,8 +13,8 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
  * Class Back
- * @package Ytec\CouponSales\Block\Form\GiftCard
- * Back button for GiftCard form.
+ * @package Ytec\CouponSales\Block\Form\CouponSale
+ * Back button for CouponSale form.
  */
 class Back extends GenericButton implements ButtonProviderInterface
 {

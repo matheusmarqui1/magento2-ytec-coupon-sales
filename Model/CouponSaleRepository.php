@@ -27,9 +27,9 @@ use Ytec\CouponSales\Model\ResourceModel\CouponSaleModel\CouponSaleCollectionFac
 use Ytec\CouponSales\Model\ResourceModel\CouponSaleResource;
 
 /**
- * Class GiftCardRepository
+ * Class CouponSaleRepository
  * @package Ytec\CouponSales\Model
- * GiftCard repository.
+ * CouponSale repository.
  */
 class CouponSaleRepository implements CouponSaleRepositoryInterface
 {
@@ -112,7 +112,7 @@ class CouponSaleRepository implements CouponSaleRepositoryInterface
         $couponSale = $this->couponSaleFactory->create();
         $this->resource->load($couponSale, $id);
         if (!$couponSale->getId()) {
-            throw new NoSuchEntityException(__('Unable to find GiftCard with ID "%1"', $id));
+            throw new NoSuchEntityException(__('Unable to find CouponSale with ID "%1"', $id));
         }
         return $couponSale;
     }

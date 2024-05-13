@@ -29,8 +29,8 @@ use Ytec\CouponSales\Model\ResourceModel\CouponSaleResource;
 
 /**
  * Class SaveCommand
- * @package Ytec\CouponSales\Command\GiftCard
- * Save GiftCard.
+ * @package Ytec\CouponSales\Command\CouponSale
+ * Save CouponSale.
  */
 class SaveCommand
 {
@@ -89,7 +89,7 @@ class SaveCommand
     }
 
     /**
-     * Save GiftCard.
+     * Save CouponSale.
      *
      * @param CouponSaleInterface $giftCard
      *
@@ -124,24 +124,24 @@ class SaveCommand
 
             $model->setHistory($giftCard->getHistory());
 
-            $this->assignCodeForGiftCard($model);
+            $this->assignCodeForCouponSale($model);
 
             $this->resource->save($model);
         } catch (AlreadyExistsException $exception) {
             throw new CouldNotSaveException(
-                __('Could not save GiftCard: %1', 'The couponsale code already exists.'),
+                __('Could not save CouponSale: %1', 'The couponsale code already exists.'),
                 $exception
             );
         } catch (Exception $exception) {
             $this->logger->error(
-                __('Could not save GiftCard. Original message: {message}'),
+                __('Could not save CouponSale. Original message: {message}'),
                 [
                     'message' => $exception->getMessage(),
                     'exception' => $exception
                 ]
             );
             throw new CouldNotSaveException(
-                __('Could not save GiftCard: %1', $exception->getMessage()),
+                __('Could not save CouponSale: %1', $exception->getMessage()),
                 $exception
             );
         }
@@ -158,7 +158,7 @@ class SaveCommand
      * @throws NoSuchEntityException
      * @noinspection PhpDeprecationInspection
      */
-    private function assignCodeForGiftCard(CouponSaleModel $model): void
+    private function assignCodeForCouponSale(CouponSaleModel $model): void
     {
         /** @var CouponSaleInterface|CouponSaleModel $model */
         if ($model->isObjectNew()) {

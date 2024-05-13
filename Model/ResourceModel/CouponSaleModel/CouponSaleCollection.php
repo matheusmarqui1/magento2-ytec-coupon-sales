@@ -15,9 +15,9 @@ use Ytec\CouponSales\Model\CouponSaleModel;
 use Ytec\CouponSales\Model\ResourceModel\CouponSaleResource;
 
 /**
- * Class GiftCardCollection
- * @package Ytec\CouponSales\Model\ResourceModel\GiftCardModel
- * GiftCard collection model.
+ * Class CouponSaleCollection
+ * @package Ytec\CouponSales\Model\ResourceModel\CouponSaleModel
+ * CouponSale collection model.
  */
 class CouponSaleCollection extends AbstractCollection
 {

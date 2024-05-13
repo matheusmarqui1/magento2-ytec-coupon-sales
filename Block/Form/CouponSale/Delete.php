@@ -15,8 +15,8 @@ use Ytec\CouponSales\Api\Data\CouponSaleInterface;
 
 /**
  * Class Delete
- * @package Ytec\CouponSales\Block\Form\GiftCard
- * Delete button for GiftCard form.
+ * @package Ytec\CouponSales\Block\Form\CouponSale
+ * Delete button for CouponSale form.
  */
 class Delete extends GenericButton implements ButtonProviderInterface
 {

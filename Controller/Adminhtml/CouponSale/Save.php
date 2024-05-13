@@ -22,8 +22,8 @@ use Ytec\CouponSales\Api\CouponSaleRepositoryInterface;
 
 /**
  * Class Save
- * @package Ytec\CouponSales\Controller\Adminhtml\GiftCard
- * Save GiftCard action controller.
+ * @package Ytec\CouponSales\Controller\Adminhtml\CouponSale
+ * Save CouponSale action controller.
  */
 class Save extends BackendAction implements HttpPostActionInterface
 {
@@ -68,7 +68,7 @@ class Save extends BackendAction implements HttpPostActionInterface
     }
 
     /**
-     * Save GiftCard Action.
+     * Save CouponSale Action.
      *
      * @return ResultInterface
      */

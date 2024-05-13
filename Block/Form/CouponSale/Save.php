@@ -14,8 +14,8 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
  * Class Save
- * @package Ytec\CouponSales\Block\Form\GiftCard
- * Save button for GiftCard form.
+ * @package Ytec\CouponSales\Block\Form\CouponSale
+ * Save button for CouponSale form.
  */
 class Save extends GenericButton implements ButtonProviderInterface
 {

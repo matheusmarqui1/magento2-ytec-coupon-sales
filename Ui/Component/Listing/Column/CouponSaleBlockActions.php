@@ -17,9 +17,9 @@ use Magento\Ui\Component\Listing\Columns\Column;
 use Ytec\CouponSales\Api\Data\CouponSaleInterface;
 
 /**
- * Class GiftCardBlockActions
+ * Class CouponSaleBlockActions
  * @package Ytec\CouponSales\Ui\Component\Listing\Column
- * GiftCard block actions.
+ * CouponSale block actions.
  */
 class CouponSaleBlockActions extends Column
 {

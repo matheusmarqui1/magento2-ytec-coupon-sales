@@ -100,7 +100,7 @@ class CouponSaleSaveValidator implements CouponSaleSaveValidatorInterface
             $this->codeTemplateValidator->validate(
                 $rule->getName(),
                 $couponSale->getCode(),
-                $rule->getGiftCardCouponTemplate()
+                $rule->getCouponSaleCouponTemplate()
             );
         }
     }

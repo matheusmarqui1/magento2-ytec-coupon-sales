@@ -14,7 +14,7 @@ use Magento\Framework\DataObject;
 use Ytec\CouponSales\Api\Data\CouponSaleInterface;
 
 /**
- * Class GiftCardData
+ * Class CouponSaleData
  * @package Ytec\CouponSales\Model\Data
  */
 class CouponSaleData extends DataObject implements CouponSaleInterface
