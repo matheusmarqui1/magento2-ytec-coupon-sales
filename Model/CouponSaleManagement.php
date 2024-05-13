@@ -14,6 +14,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
 use Ytec\Base\Api\Rest\RestResponseInterface;
+use Ytec\CouponSales\Api\Data\CouponSaleInterface;
 use Ytec\CouponSales\Api\Data\CouponSaleInterfaceFactory;
 use Ytec\CouponSales\Api\CouponSaleManagementInterface;
 use Ytec\CouponSales\Api\CouponSaleRepositoryInterface;
@@ -199,7 +200,17 @@ class CouponSaleManagement implements CouponSaleManagementInterface
         }
 
         try {
+            /** @var CouponSaleModel|CouponSaleInterface $couponSaleModel */
             $couponSaleModel = $this->couponsaleRepository->getCouponSaleByCode($code);
+
+            if ($couponSaleModel->getStatus() === Status::USED) {
+                return $this->restResponse->badRequest(
+                    [
+                        'message' => __(self::COUPON_SALE_ALREADY_USED_MESSAGE, $code)
+                    ]
+                );
+            }
+
             /** @var CouponSaleData $couponSaleUpdated */
             $couponSaleUpdated = $this->couponSaleFactory->create()
                 ->addData($couponSaleModel->getData())
@@ -212,6 +223,7 @@ class CouponSaleManagement implements CouponSaleManagementInterface
                 )
                 ->setStatus(Status::DISABLED_BY_PARTNER);
             $this->couponsaleRepository->save($couponSaleUpdated);
+
             return $this->restResponse->noContent();
         } catch (NoSuchEntityException $ex) {
             return $this->restResponse->notFound([

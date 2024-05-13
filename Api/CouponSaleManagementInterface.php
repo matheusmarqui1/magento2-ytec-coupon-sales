@@ -27,6 +27,7 @@ interface CouponSaleManagementInterface
     public const RULE_NOT_FOUND_MESSAGE = 'The rule \'%1\' related to the Coupon Sale \'%2\' does not exist.';
     public const COUPON_SALES_SUCCESS_MESSAGE = 'Coupon Sale(s) created successfully.';
     public const MODULE_DISABLED_MESSAGE = 'The partner Coupon Sale module or current endpoint is currently disabled.';
+    public const COUPON_SALE_ALREADY_USED_MESSAGE = 'The Coupon Sale with code \'%1\' has already been used.';
     /**#@-*/
 
     /**

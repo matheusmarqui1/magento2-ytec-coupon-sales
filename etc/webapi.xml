@@ -10,24 +10,42 @@
 -->
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!--  Get a coupon sale rule by ID.  -->
+    <route url="/V1/ytec/coupon-sales-rules/:ruleId" method="GET">
+        <service class="Ytec\CouponSales\Api\CouponSaleRuleManagementInterface" method="getById"/>
+        <resources>
+            <resource ref="Ytec_CouponSales::management"/>
+        </resources>
+    </route>
+    <!--  Get a coupon sales collection (rules marked as coupon sale rule).  -->
+    <route url="/V1/ytec/coupon-sales-rules" method="GET">
+        <service class="Ytec\CouponSales\Api\CouponSaleRuleManagementInterface" method="getListing"/>
+        <resources>
+            <resource ref="Ytec_CouponSales::management"/>
+        </resources>
+    </route>
+    <!--  Get a coupon sale by the coupon code.  -->
     <route url="/V1/ytec/coupon-sales/:code" method="GET">
         <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="getByCode"/>
         <resources>
             <resource ref="Ytec_CouponSales::management"/>
         </resources>
     </route>
+    <!--  Delete a coupon sale by the coupon code.  -->
     <route url="/V1/ytec/coupon-sales/:code" method="DELETE">
         <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="deleteByCode"/>
         <resources>
             <resource ref="Ytec_CouponSales::management"/>
         </resources>
     </route>
+    <!--  Disable a coupon sale by the coupon code.  -->
     <route url="/V1/ytec/coupon-sales/:code/disable" method="PUT">
         <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="disableByCode"/>
         <resources>
             <resource ref="Ytec_CouponSales::management"/>
         </resources>
     </route>
+    <!--  Create coupon sales.  -->
     <route url="/V1/ytec/coupon-sales/coupons" method="POST">
         <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="createCouponSales"/>
         <resources>

@@ -28,4 +28,6 @@
                 type="Ytec\CouponSales\Model\Config\ModuleConfiguration"/>
     <preference for="Ytec\CouponSales\Api\Data\CouponSaleOrderInterface"
                 type="Ytec\CouponSales\Model\Data\CouponSaleOrder"/>
+    <preference for="Ytec\CouponSales\Api\CouponSaleRuleManagementInterface"
+                type="Ytec\CouponSales\Model\CouponSaleRuleManagement"/>
 </config>
