@@ -118,13 +118,9 @@ class AddCouponSaleDataToOrdersApi
         OrderRepositoryInterface $subject,
         OrderSearchResultInterface $result
     ): OrderSearchResultInterface {
-        $orders = [];
-
-        foreach ($result->getItems() as $order) {
-            $orders[] = $this->afterGet($subject, $order);
+        foreach ($result->getItems() as &$order) {
+            $order = $this->afterGet($subject, $order);
         }
-
-        $result->setItems($orders);
 
         return $result;
     }
