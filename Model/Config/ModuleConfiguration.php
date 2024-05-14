@@ -100,4 +100,31 @@ class ModuleConfiguration implements ModuleConfigurationInterface
     {
         return $this->configurationManager->get(static::XML_PATH_SALES_ID_REGEX);
     }
+
+    /**
+     * {@inheritdoc}
+     * @throws NoSuchEntityException
+     */
+    public function isBulkDisableVoucherEndpointEnabled(): bool
+    {
+        return $this->configurationManager->isOn(static::XML_PATH_ENDPOINTS_BULK_DISABLE_VOUCHER_ENABLE);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @throws NoSuchEntityException
+     */
+    public function shouldMakeAvailableOnCancellation(): bool
+    {
+        return $this->configurationManager->isOn(static::XML_PATH_MAKE_AVAILABLE_ON_CANCELLATION);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @throws NoSuchEntityException
+     */
+    public function shouldMakeAvailableOnRefund(): bool
+    {
+        return $this->configurationManager->isOn(static::XML_PATH_MAKE_AVAILABLE_ON_REFUND);
+    }
 }

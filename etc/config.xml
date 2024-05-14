@@ -6,6 +6,8 @@
             <general>
                 <enable>1</enable>
                 <validate_templates>1</validate_templates>
+                <make_coupon_sale_available_on_refund>1</make_coupon_sale_available_on_refund>
+                <make_coupon_sale_available_on_cancel>1</make_coupon_sale_available_on_cancel>
                 <sales_id_regex>/\d{6}(?=\D*$)/</sales_id_regex>
             </general>
             <endpoints>
@@ -22,6 +24,9 @@
                 <disable_voucher>
                     <enable>1</enable>
                 </disable_voucher>
+                <bulk_disable_voucher>
+                    <enable>1</enable>
+                </bulk_disable_voucher>
             </endpoints>
         </ytec_couponsales>
     </default>

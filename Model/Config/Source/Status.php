@@ -12,6 +12,10 @@ namespace Ytec\CouponSales\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
+/**
+ * Class Status
+ * @package Ytec\CouponSales\Model\Config\Source
+ */
 class Status implements OptionSourceInterface
 {
     public const AVAILABLE = 'available';

@@ -54,12 +54,12 @@ class Rule implements OptionSourceInterface
                 'ASC'
             )->create();
 
-        /** @var RuleInterface[] $giftCardRules */
-        $giftCardRules = $this->ruleRepository->getList($criteria)->getItems();
+        /** @var RuleInterface[] $couponSaleRules */
+        $couponSaleRules = $this->ruleRepository->getList($criteria)->getItems();
 
         return array_map(fn (RuleInterface $rule) => [
             'value' => $rule->getRuleId(),
             'label' => $rule->getName()
-        ], $giftCardRules);
+        ], $couponSaleRules);
     }
 }

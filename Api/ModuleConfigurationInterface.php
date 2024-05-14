@@ -22,6 +22,10 @@ interface ModuleConfigurationInterface
      */
     public const XML_PATH_ENABLED = 'ytec_couponsales/general/enable';
     public const XML_PATH_VALIDATE_CODE_TEMPLATE = 'ytec_couponsales/general/validate_templates';
+    public const XML_PATH_MAKE_AVAILABLE_ON_CANCELLATION
+        = 'ytec_couponsales/general/make_coupon_sale_available_on_cancel';
+    public const XML_PATH_MAKE_AVAILABLE_ON_REFUND
+        = 'ytec_couponsales/general/make_coupon_sale_available_on_refund';
     public const XML_PATH_SALES_ID_REGEX = 'ytec_couponsales/general/sales_id_regex';
     /**#@-*/
 
@@ -34,6 +38,7 @@ interface ModuleConfigurationInterface
     public const XML_PATH_ENDPOINTS_DELETE_VOUCHER_IS_SOFT_DELETE =
         'ytec_couponsales/endpoints/delete_voucher/soft_delete';
     public const XML_PATH_ENDPOINTS_DISABLE_VOUCHER_ENABLE = 'ytec_couponsales/endpoints/disable_voucher/enable';
+    public const XML_PATH_ENDPOINTS_BULK_DISABLE_VOUCHER_ENABLE = 'ytec_couponsales/endpoints/bulk_disable_voucher/enable';
     /**#@-*/
 
     /**
@@ -49,6 +54,20 @@ interface ModuleConfigurationInterface
      * @return bool
      */
     public function isCodeTemplateValidationEnabled(): bool;
+
+    /**
+     * Check if we should make coupon sale available on cancellation.
+     *
+     * @return bool
+     */
+    public function shouldMakeAvailableOnCancellation(): bool;
+
+    /**
+     * Check if we should make coupon sale available on refund.
+     *
+     * @return bool
+     */
+    public function shouldMakeAvailableOnRefund(): bool;
 
     /**
      * Get the sales ID regex.
@@ -91,4 +110,11 @@ interface ModuleConfigurationInterface
      * @return bool
      */
     public function isDisableVoucherEndpointEnabled(): bool;
+
+    /**
+     * Check if bulk disable voucher endpoint is enabled.
+     *
+     * @return bool
+     */
+    public function isBulkDisableVoucherEndpointEnabled(): bool;
 }

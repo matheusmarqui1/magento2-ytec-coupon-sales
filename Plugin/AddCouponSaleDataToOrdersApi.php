@@ -24,6 +24,11 @@ use Ytec\CouponSales\Model\CouponSaleModel;
 use Ytec\CouponSales\Ui\Component\Listing\Column\SalesId;
 use Ytec\CouponSales\Helper\ProductDiscountUsage;
 
+
+/**
+ * Class AddCouponSaleDataToOrdersApi
+ * @package Ytec\CouponSales\Plugin
+ */
 class AddCouponSaleDataToOrdersApi
 {
     /**
@@ -77,6 +82,7 @@ class AddCouponSaleDataToOrdersApi
      * @param OrderRepositoryInterface $subject
      * @param OrderInterface $result
      * @return OrderInterface
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     public function afterGet(OrderRepositoryInterface $subject, OrderInterface $result): OrderInterface
     {

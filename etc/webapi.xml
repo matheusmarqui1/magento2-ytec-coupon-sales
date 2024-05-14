@@ -45,6 +45,13 @@
             <resource ref="Ytec_CouponSales::management"/>
         </resources>
     </route>
+    <!--  Disable a coupon sale by the coupon code.  -->
+    <route url="/V1/ytec/coupon-sales/bulk/disable" method="POST">
+        <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="disableByCodeInBulk"/>
+        <resources>
+            <resource ref="Ytec_CouponSales::management"/>
+        </resources>
+    </route>
     <!--  Create coupon sales.  -->
     <route url="/V1/ytec/coupon-sales/coupons" method="POST">
         <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="createCouponSales"/>

@@ -28,6 +28,7 @@ interface CouponSaleManagementInterface
     public const COUPON_SALES_SUCCESS_MESSAGE = 'Coupon Sale(s) created successfully.';
     public const MODULE_DISABLED_MESSAGE = 'The partner Coupon Sale module or current endpoint is currently disabled.';
     public const COUPON_SALE_ALREADY_USED_MESSAGE = 'The Coupon Sale with code \'%1\' has already been used.';
+    public const BULK_DISABLE_COUPON_SALES_ERROR_MESSAGE = 'Some errors occurred while disabling the coupon sales in bulk.';
     /**#@-*/
 
     /**
@@ -50,6 +51,13 @@ interface CouponSaleManagementInterface
      * @return \Ytec\Base\Api\Rest\RestResponseInterface
      */
     public function disableByCode(string $code): \Ytec\Base\Api\Rest\RestResponseInterface;
+
+    /**
+     * Bulk disable Coupon Sales by code.
+     * @param string[] $codes
+     * @return \Ytec\Base\Api\Rest\RestResponseInterface
+     */
+    public function disableByCodeInBulk(array $codes): \Ytec\Base\Api\Rest\RestResponseInterface;
 
     /**
      * Create Coupon Sales.

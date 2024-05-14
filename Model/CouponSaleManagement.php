@@ -22,6 +22,7 @@ use Ytec\CouponSales\Api\ModuleConfigurationInterface;
 use Ytec\CouponSales\Helper\PartnerName;
 use Ytec\CouponSales\Model\Config\Source\Status;
 use Ytec\CouponSales\Model\Data\CouponSaleData;
+use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
  * Class CouponSaleManagement
@@ -37,7 +38,7 @@ class CouponSaleManagement implements CouponSaleManagementInterface
     /**
      * @var CouponSaleRepositoryInterface
      */
-    private CouponSaleRepositoryInterface $couponsaleRepository;
+    private CouponSaleRepositoryInterface $couponSaleRepository;
 
     /**
      * @var LoggerInterface
@@ -60,6 +61,11 @@ class CouponSaleManagement implements CouponSaleManagementInterface
     private ModuleConfigurationInterface $moduleConfiguration;
 
     /**
+     * @var DateTime
+     */
+    private DateTime $dateTime;
+
+    /**
      * CouponSaleManagement constructor.
      * @param RestResponseInterface $restResponse
      * @param CouponSaleRepositoryInterface $couponsaleRepository
@@ -67,6 +73,7 @@ class CouponSaleManagement implements CouponSaleManagementInterface
      * @param PartnerName $partnerName
      * @param CouponSaleInterfaceFactory $couponSaleFactory
      * @param ModuleConfigurationInterface $moduleConfiguration
+     * @param DateTime $dateTime
      */
     public function __construct(
         RestResponseInterface $restResponse,
@@ -74,14 +81,16 @@ class CouponSaleManagement implements CouponSaleManagementInterface
         LoggerInterface $logger,
         PartnerName $partnerName,
         CouponSaleInterfaceFactory $couponSaleFactory,
-        ModuleConfigurationInterface $moduleConfiguration
+        ModuleConfigurationInterface $moduleConfiguration,
+        DateTime $dateTime
     ) {
         $this->restResponse = $restResponse;
-        $this->couponsaleRepository = $couponsaleRepository;
+        $this->couponSaleRepository = $couponsaleRepository;
         $this->logger = $logger;
         $this->partnerName = $partnerName;
         $this->couponSaleFactory = $couponSaleFactory;
         $this->moduleConfiguration = $moduleConfiguration;
+        $this->dateTime = $dateTime;
     }
 
     /**
@@ -89,14 +98,14 @@ class CouponSaleManagement implements CouponSaleManagementInterface
      */
     public function getByCode(string $code): RestResponseInterface
     {
-        if (!$this->moduleConfiguration->isEnabled() || !$this->moduleConfiguration->isGetVoucherEndpointEnabled()) {
+        if (!$this->isModuleConfigured('isGetVoucherEndpointEnabled')) {
             return $this->restResponse->forbidden([
                 'message' => __(self::MODULE_DISABLED_MESSAGE)
             ]);
         }
 
         try {
-            $couponSale = $this->couponsaleRepository->getCouponSaleByCode($code);
+            $couponSale = $this->couponSaleRepository->getCouponSaleByCode($code);
             return $this->restResponse->ok($couponSale->getData());
         } catch (NoSuchEntityException $ex) {
             return $this->restResponse->notFound([
@@ -114,22 +123,19 @@ class CouponSaleManagement implements CouponSaleManagementInterface
      */
     public function deleteByCode(string $code): RestResponseInterface
     {
-        if (!$this->moduleConfiguration->isEnabled() || !$this->moduleConfiguration->isDeleteVoucherEndpointEnabled()) {
+        if (!$this->isModuleConfigured('isDeleteVoucherEndpointEnabled')) {
             return $this->restResponse->forbidden([
                 'message' => __(self::MODULE_DISABLED_MESSAGE)
             ]);
         }
 
-        /**
-         * If the soft delete is enabled, we just disable the Coupon Sale instead of deleting it.
-         */
         if ($this->moduleConfiguration->isDeleteVoucherSoftDelete()) {
             return $this->disableByCode($code);
         }
 
         try {
-            $couponSale = $this->couponsaleRepository->getCouponSaleByCode($code);
-            $this->couponsaleRepository->delete($couponSale);
+            $couponSale = $this->couponSaleRepository->getCouponSaleByCode($code);
+            $this->couponSaleRepository->delete($couponSale);
             return $this->restResponse->noContent();
         } catch (NoSuchEntityException $ex) {
             return $this->restResponse->notFound([
@@ -147,7 +153,7 @@ class CouponSaleManagement implements CouponSaleManagementInterface
      */
     public function createCouponSales(array $couponSales): RestResponseInterface
     {
-        if (!$this->moduleConfiguration->isEnabled() || !$this->moduleConfiguration->isCreateVoucherEndpointEnabled()) {
+        if (!$this->isModuleConfigured('isCreateVoucherEndpointEnabled')) {
             return $this->restResponse->forbidden([
                 'message' => __(self::MODULE_DISABLED_MESSAGE)
             ]);
@@ -155,16 +161,7 @@ class CouponSaleManagement implements CouponSaleManagementInterface
 
         foreach ($couponSales as $couponSale) {
             try {
-                $couponSale
-                    ->setPartnerName($this->partnerName->getPartnerNameFromRequest())
-                    ->addHistoryLine(
-                        __(
-                            'Coupon Sale created at %1 by %2.',
-                            (new \DateTime())->format('Y-m-d H:i:s'),
-                            $this->partnerName->getPartnerNameFromRequest() ?: 'Partner API'
-                        )->render()
-                    )->setStatus(Status::AVAILABLE);
-                $this->couponsaleRepository->save($couponSale);
+                $this->createCouponSale($couponSale);
             } catch (NoSuchEntityException $ex) {
                 return $this->restResponse->notFound([
                     'message' => __(self::RULE_NOT_FOUND_MESSAGE, $couponSale->getRuleId(), $couponSale->getCode())
@@ -189,41 +186,40 @@ class CouponSaleManagement implements CouponSaleManagementInterface
     }
 
     /**
+     * Create a single coupon sale.
+     *
+     * @param CouponSaleInterface $couponSale
+     * @return void
+     * @throws LocalizedException
+     */
+    private function createCouponSale(CouponSaleInterface $couponSale): void
+    {
+        $partnerName = $this->partnerName->getPartnerNameFromRequest() ?: 'Partner API';
+        $couponSale
+            ->setPartnerName($partnerName)
+            ->addHistoryLine(
+                __(
+                    'Coupon Sale created at %1 by %2.',
+                    $this->dateTime->gmtDate(),
+                    $partnerName
+                )->render()
+            )->setStatus(Status::AVAILABLE);
+        $this->couponSaleRepository->save($couponSale);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function disableByCode(string $code): RestResponseInterface
     {
-        if (!$this->moduleConfiguration->isEnabled() || !$this->moduleConfiguration->isDisableVoucherEndpointEnabled()) {
+        if (!$this->isModuleConfigured('isDisableVoucherEndpointEnabled')) {
             return $this->restResponse->forbidden([
                 'message' => __(self::MODULE_DISABLED_MESSAGE)
             ]);
         }
 
         try {
-            /** @var CouponSaleModel|CouponSaleInterface $couponSaleModel */
-            $couponSaleModel = $this->couponsaleRepository->getCouponSaleByCode($code);
-
-            if ($couponSaleModel->getStatus() === Status::USED) {
-                return $this->restResponse->badRequest(
-                    [
-                        'message' => __(self::COUPON_SALE_ALREADY_USED_MESSAGE, $code)
-                    ]
-                );
-            }
-
-            /** @var CouponSaleData $couponSaleUpdated */
-            $couponSaleUpdated = $this->couponSaleFactory->create()
-                ->addData($couponSaleModel->getData())
-                ->addHistoryLine(
-                    __(
-                        'Coupon Sale updated to "disabled" at %1 by %2.',
-                        (new \DateTime())->format('Y-m-d H:i:s'),
-                        $this->partnerName->getPartnerNameFromRequest() ?: 'Partner API'
-                    )->render()
-                )
-                ->setStatus(Status::DISABLED_BY_PARTNER);
-            $this->couponsaleRepository->save($couponSaleUpdated);
-
+            $this->processDisableByCode($code);
             return $this->restResponse->noContent();
         } catch (NoSuchEntityException $ex) {
             return $this->restResponse->notFound([
@@ -234,5 +230,84 @@ class CouponSaleManagement implements CouponSaleManagementInterface
                 'message' => __(self::COUPON_SALE_SAVE_ERROR_MESSAGE, $code, $ex->getMessage())
             ]);
         }
+    }
+
+    /**
+     * Process the disable action for a coupon sale by code.
+     *
+     * @param string $code
+     * @return void
+     * @throws LocalizedException
+     */
+    private function processDisableByCode(string $code): void
+    {
+        /** @var CouponSaleModel|CouponSaleInterface $couponSaleModel */
+        $couponSaleModel = $this->couponSaleRepository->getCouponSaleByCode($code);
+
+        if ($couponSaleModel->getStatus() === Status::USED) {
+            throw new LocalizedException(__(self::COUPON_SALE_ALREADY_USED_MESSAGE, $code));
+        }
+
+        $partnerName = $this->partnerName->getPartnerNameFromRequest() ?: 'Partner API';
+        $couponSaleUpdated = $this->couponSaleFactory->create()
+            ->addData($couponSaleModel->getData())
+            ->addHistoryLine(
+                __(
+                    'Coupon Sale updated to "disabled" at %1 by %2.',
+                    $this->dateTime->gmtDate(),
+                    $partnerName
+                )->render()
+            )
+            ->setStatus(Status::DISABLED_BY_PARTNER);
+        $this->couponSaleRepository->save($couponSaleUpdated);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disableByCodeInBulk(array $codes): RestResponseInterface
+    {
+        if (!$this->isModuleConfigured('isBulkDisableVoucherEndpointEnabled')) {
+            return $this->restResponse->forbidden([
+                'message' => __(self::MODULE_DISABLED_MESSAGE)
+            ]);
+        }
+
+        $errors = [];
+
+        foreach ($codes as $code) {
+            try {
+                $this->processDisableByCode($code);
+            } catch (\Exception $exception) {
+                $errors[] = [
+                    'code' => $code,
+                    'message' => $exception->getMessage()
+                ];
+            }
+        }
+
+        if (!empty($errors)) {
+            return $this->restResponse->badRequest([
+                'message' => __(self::BULK_DISABLE_COUPON_SALES_ERROR_MESSAGE),
+                'errors' => $errors,
+                'total_entries' => count($codes),
+                'total_errors' => count($errors),
+                'successfully_disabled' => count($codes) - count($errors)
+            ]);
+        }
+
+        return $this->restResponse->noContent();
+    }
+
+    /**
+     * Check if the module is configured and enabled for the given endpoint.
+     *
+     * @param string $endpointEnableConfigMethod
+     * @return bool
+     */
+    private function isModuleConfigured(string $endpointEnableConfigMethod): bool
+    {
+        return $this->moduleConfiguration->isEnabled() &&
+            call_user_func([$this->moduleConfiguration, $endpointEnableConfigMethod]);
     }
 }

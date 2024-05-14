@@ -26,7 +26,17 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Validate if the Coupon Sale sent by partner matches the rule code's template.</comment>
                 </field>
-                <field id="sales_id_regex" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="make_coupon_sale_available_on_refund" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Make Coupon Sale Available on Refund</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Make the coupon sale available after the order is completely refunded (through credit memo).</comment>
+                </field>
+                <field id="make_coupon_sale_available_on_cancel" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Make Coupon Sale Available on Cancel</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Make the coupon sale available after the order is canceled.</comment>
+                </field>
+                <field id="sales_id_regex" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sales ID Regex</label>
                     <comment>Regex to extract the Sales ID sent by partner.</comment>
                 </field>
@@ -34,7 +44,7 @@
             <group id="endpoints" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>API Endpoints</label>
                 <group id="create_voucher" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Create Voucher</label>
+                    <label>Create Coupon Sale</label>
                     <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Enable</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -42,7 +52,7 @@
                     </field>
                 </group>
                 <group id="get_voucher" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Get Voucher</label>
+                    <label>Get Coupon Sale</label>
                     <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Enable</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -50,7 +60,7 @@
                     </field>
                 </group>
                 <group id="delete_voucher" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Delete Voucher</label>
+                    <label>Delete Coupon Sale</label>
                     <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Enable</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -63,11 +73,19 @@
                     </field>
                 </group>
                 <group id="disable_voucher" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Disable Voucher</label>
+                    <label>Disable Coupon Sale</label>
                     <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Enable</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <comment><![CDATA[Enable the endpoint to disable a voucher. <strong>PUT /V1/ytec/coupon-sales/:code/disable</strong>]]></comment>
+                    </field>
+                </group>
+                <group id="bulk_disable_voucher" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Bulk Disable Coupon Sale</label>
+                    <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[Enable the endpoint to disable a list of vouchers. <strong>POST /V1/ytec/coupon-sales/bulk/disable</strong>]]></comment>
                     </field>
                 </group>
             </group>

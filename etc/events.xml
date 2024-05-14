@@ -5,4 +5,12 @@
         <observer name="Ytec_CouponSales_Set_CouponSale_As_Used_Observer"
                   instance="Ytec\CouponSales\Observer\SetCouponSaleAsUsedObserver" />
     </event>
+    <event name="order_cancel_after" >
+        <observer name="Ytec_CouponSales_Set_CouponSale_As_Available_Observer"
+                  instance="Ytec\CouponSales\Observer\SetCouponSaleAsAvailableOnCancellationObserver" />
+    </event>
+    <event name="sales_order_creditmemo_save_before">
+        <observer name="Ytec_CouponSales_Set_CouponSale_As_Available_On_Creditmemo_Observer"
+                  instance="Ytec\CouponSales\Observer\SetCouponSaleAsAvailableOnCreditmemoObserver" />
+    </event>
 </config>
