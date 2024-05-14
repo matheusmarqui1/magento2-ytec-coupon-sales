@@ -45,7 +45,7 @@
             <resource ref="Ytec_CouponSales::management"/>
         </resources>
     </route>
-    <!--  Disable a coupon sale by the coupon code.  -->
+    <!--  Disable coupon sales by the coupon code in bulk.  -->
     <route url="/V1/ytec/coupon-sales/bulk/disable" method="POST">
         <service class="Ytec\CouponSales\Api\CouponSaleManagementInterface" method="disableByCodeInBulk"/>
         <resources>
