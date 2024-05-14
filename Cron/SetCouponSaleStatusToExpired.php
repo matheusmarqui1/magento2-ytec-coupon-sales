@@ -92,10 +92,10 @@ class SetCouponSaleStatusToExpired
 
         $couponSales = $this->couponSaleRepository->getList($searchCriteria)->getItems();
 
-        /** @var CouponSaleInterface|CouponSaleModel $giftCard */
-        foreach ($couponSales as $giftCard) {
+        /** @var CouponSaleInterface|CouponSaleModel $couponSale */
+        foreach ($couponSales as $couponSale) {
             $updatedCouponSale = $this->couponSaleFactory->create()
-                ->addData($giftCard->getData())
+                ->addData($couponSale->getData())
                 ->addHistoryLine(
                     __(
                         'Coupon Sale updated to "expired" at %1 by CRON.',

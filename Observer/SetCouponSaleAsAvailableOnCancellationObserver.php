@@ -38,7 +38,7 @@ class SetCouponSaleAsAvailableOnCancellationObserver implements ObserverInterfac
      * @var string
      */
     public const COUPON_SALE_WAS_MADE_AVAILABLE_AGAIN_MESSAGE =
-        'Coupon sale "%1" was made available again due to order cancellation at %2.';
+        'Coupon Sale "%1" was made available again due to order cancellation at %2.';
 
     /**
      * @var CouponSaleRepositoryInterface
@@ -164,15 +164,16 @@ class SetCouponSaleAsAvailableOnCancellationObserver implements ObserverInterfac
      * Log a warning if the times used is incorrect.
      *
      * @param CouponInterface $relatedCoupon
-     * @param CouponSaleInterface $couponSale
+     * @param CouponSaleModel $couponSale
      * @param Order $order
      * @return void
      */
     private function logWarningIfTimesUsedIsIncorrect(
         CouponInterface $relatedCoupon,
-        CouponSaleInterface $couponSale,
+        CouponSaleModel $couponSale,
         Order $order
     ): void {
+        /** @var CouponSaleModel|CouponSaleInterface $couponSale */
         if ($relatedCoupon->getTimesUsed() > 0) {
             $this->logger->warning(
                 __(
@@ -193,14 +194,14 @@ class SetCouponSaleAsAvailableOnCancellationObserver implements ObserverInterfac
     /**
      * Update the coupon sale and order.
      *
-     * @param CouponSaleInterface $couponSale
+     * @param CouponSaleModel $couponSale
      * @param Order $order
      * @param string $couponCode
      * @return void
-     * @throws LocalizedException
      * @throws CouldNotSaveException
+     * @throws LocalizedException
      */
-    private function updateCouponSaleAndOrder(CouponSaleInterface $couponSale, Order $order, string $couponCode): void
+    private function updateCouponSaleAndOrder(CouponSaleModel $couponSale, Order $order, string $couponCode): void
     {
         $updatedCouponSale = $this->couponSaleFactory->create();
         $updatedCouponSale->addData($couponSale->getData())

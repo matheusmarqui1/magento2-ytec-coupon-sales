@@ -91,29 +91,29 @@ class SaveCommand
     /**
      * Save CouponSale.
      *
-     * @param CouponSaleInterface $giftCard
+     * @param CouponSaleInterface $couponSale
      *
      * @return CouponSaleModel
      * @throws CouldNotSaveException If an error occurs while saving.
      * @throws LocalizedException If validation fails.
      */
-    public function execute(CouponSaleInterface $giftCard): CouponSaleModel
+    public function execute(CouponSaleInterface $couponSale): CouponSaleModel
     {
-        $giftCard->setCode(trim(strtoupper($giftCard->getCode())));
-        $this->couponSaleSaveValidator->validate($giftCard);
+        $couponSale->setCode(trim(strtoupper($couponSale->getCode())));
+        $this->couponSaleSaveValidator->validate($couponSale);
         try {
             /** @var CouponSaleModel|CouponSaleInterface $model */
             $model = $this->modelFactory->create();
-            $model->addData($giftCard->getData());
+            $model->addData($couponSale->getData());
             $model->setHasDataChanges(true);
 
             if (!$model->getData(CouponSaleInterface::ENTITY_ID)) {
                 $model->isObjectNew(true);
-                $giftCard->addHistoryLine(
+                $couponSale->addHistoryLine(
                     __('Coupon Sale created at %1.', (new \DateTime())->format('Y-m-d H:i:s'))->render()
                 );
             } else {
-                $giftCard->addHistoryLine(
+                $couponSale->addHistoryLine(
                     __(
                         'Coupon Sale updated at %1: Status - "%2".',
                         (new \DateTime())->format('Y-m-d H:i:s'),
@@ -122,7 +122,7 @@ class SaveCommand
                 );
             }
 
-            $model->setHistory($giftCard->getHistory());
+            $model->setHistory($couponSale->getHistory());
 
             $this->assignCodeForCouponSale($model);
 

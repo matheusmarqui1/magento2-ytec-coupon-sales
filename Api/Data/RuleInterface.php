@@ -51,8 +51,8 @@ interface RuleInterface extends MagentoRuleInterface
     /**
      * Set Coupon Sale coupon template
      *
-     * @param string $giftCardCouponTemplate
+     * @param string $couponSaleCouponTemplate
      * @return $this
      */
-    public function setCouponSaleCouponTemplate(string $giftCardCouponTemplate): self;
+    public function setCouponSaleCouponTemplate(string $couponSaleCouponTemplate): self;
 }

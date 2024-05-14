@@ -35,8 +35,8 @@ class Rule extends MagentoRule implements RuleInterface
         return $this->_get(self::GIFTCARD_COUPON_TEMPLATE);
     }
 
-    public function setCouponSaleCouponTemplate(string $giftCardCouponTemplate): RuleInterface
+    public function setCouponSaleCouponTemplate(string $couponSaleCouponTemplate): RuleInterface
     {
-        return $this->setData(self::GIFTCARD_COUPON_TEMPLATE, $giftCardCouponTemplate);
+        return $this->setData(self::GIFTCARD_COUPON_TEMPLATE, $couponSaleCouponTemplate);
     }
 }

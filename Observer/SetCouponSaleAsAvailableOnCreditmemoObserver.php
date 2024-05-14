@@ -35,7 +35,7 @@ class SetCouponSaleAsAvailableOnCreditmemoObserver implements ObserverInterface
      * @var string
      */
     public const COUPON_SALE_WAS_MADE_AVAILABLE_AGAIN_MESSAGE =
-        'Coupon sale "%1" was made available again due to order credit memo at %2.';
+        'Coupon Sale "%1" was made available again due to order credit memo at %2.';
 
     /**
      * @var CouponSaleRepositoryInterface

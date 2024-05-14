@@ -67,16 +67,16 @@ class DeleteCommand
     /**
      * Delete CouponSale.
      *
-     * @param CouponSaleModel $giftCardModel
+     * @param CouponSaleModel $couponSaleModel
      * @return void
      * @throws CouldNotDeleteException
      */
-    public function execute(CouponSaleModel $giftCardModel): void
+    public function execute(CouponSaleModel $couponSaleModel): void
     {
         try {
-            /** @var CouponSaleModel|CouponSaleInterface $giftCardModel */
-            $this->couponRepository->deleteById($giftCardModel->getCodeId());
-            $this->resource->delete($giftCardModel);
+            /** @var CouponSaleModel|CouponSaleInterface $couponSaleModel */
+            $this->couponRepository->deleteById($couponSaleModel->getCodeId());
+            $this->resource->delete($couponSaleModel);
         } catch (Exception $exception) {
             $this->logger->error(
                 __('Could not delete CouponSale. Original message: {message}'),
