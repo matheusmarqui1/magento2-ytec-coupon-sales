@@ -7,8 +7,8 @@
 
 <div align="center">
 
-[![Packagist Version](https://img.shields.io/packagist/v/ytec/magento2-ytec-coupon-sales?logo=packagist&style=for-the-badge)](https://packagist.org/packages/ytec/rule-eligibility-check)
-[![Packagist Downloads](https://img.shields.io/packagist/dt/ytec/magento2-ytec-coupon-sales.svg?logo=composer&style=for-the-badge)](https://packagist.org/packages/ytec/rule-eligibility-check/stats)
+[![Packagist Version](https://img.shields.io/packagist/v/ytec/magento2-ytec-coupon-sales?logo=packagist&style=for-the-badge)](https://packagist.org/packages/ytec/magento2-ytec-coupon-sales)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/ytec/magento2-ytec-coupon-sales.svg?logo=composer&style=for-the-badge)](https://packagist.org/packages/ytec/magento2-ytec-coupon-sales/stats)
 ![Supported Magento Versions](https://img.shields.io/badge/magento-%202.4.x-brightgreen.svg?logo=magento&longCache=true&style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-green?color=%23234&style=for-the-badge)
 
