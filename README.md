@@ -113,6 +113,15 @@ php bin/magento cache:clean
 - **PUT /V1/ytec/coupon-sales/{couponCode}/disable**: Disable a coupon sale by code. The coupon can't be used anymore and will get the status "Disabled by partner".
 - **DELETE /V1/ytec/coupon-sales/{couponCode}**: Delete a coupon sale by code. The coupon will be deleted from the database, if it's not used. If the configuration indicates as soft delete, the request will be processed as a disable request.
 ![Coupon Sales Delete Endpoint Config](https://i.imgur.com/dcLRaUp.png)
+- **POST /V1/ytec/coupon-sales/bulk/disable**: Disable multiple coupon sales by code. The request payload should be an array of coupon codes.
+```json
+{
+    "codes": [
+        "COUPON_CODE_000000",
+        "COUPON_CODE_000001"
+    ]
+}
+```
 
 ## License
 
