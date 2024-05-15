@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright © 2024 Ytec. All rights reserved.
+*
+* @package    Ytec
+* @moduleName CouponSales
+* @author     Matheus Marqui <matheus.701@live.com>
+*/
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">coupon_sale_type_form.coupon_sale_type_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Coupon Sale Type</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <namespace>coupon_sale_type_form</namespace>
+        <dataScope>data.general</dataScope>
+        <deps>
+            <dep>coupon_sale_type_form.coupon_sale_type_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="save" class="Ytec\CouponSales\Block\Form\CouponSale\Save"/>
+            <button name="back" class="Ytec\CouponSales\Block\Form\CouponSale\Back"/>
+            <button name="delete" class="Ytec\CouponSales\Block\Form\CouponSaleType\Delete"/>
+        </buttons>
+    </settings>
+    <dataSource name="coupon_sale_type_form_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="ytec_couponsales_type/couponsaletype/save"/>
+        </settings>
+        <dataProvider class="Ytec\CouponSales\Ui\DataProvider\CouponSaleTypeDataProvider"
+                      name="coupon_sale_type_form_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label translate="true">General</label>
+        </settings>
+        <field name="entity_id" sortOrder="0" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Entity ID</label>
+                <dataScope>entity_id</dataScope>
+            </settings>
+        </field>
+        <field name="code" sortOrder="00" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">code</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-code" xsi:type="boolean">true</item>
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Code</label>
+                <dataScope>code</dataScope>
+                <notice>Code must be unique. Such as 'affiliate_coupon_sales'. Updating this field won't affect the existing coupon sales created previously with this code, they'll remain the same.</notice>
+            </settings>
+        </field>
+        <field name="label" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">label</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Label</label>
+                <dataScope>label</dataScope>
+                <notice>Label is used to display the coupon sale type in the admin panel. Such as 'Affiliate Coupon Sales'.</notice>
+            </settings>
+        </field>
+        <field name="is_active" sortOrder="20" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">is_active</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>bool</dataType>
+                <label translate="true">Is Active</label>
+                <dataScope>is_active</dataScope>
+                <notice>If set to Off, it won't be selectable on sales rule edit page.</notice>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

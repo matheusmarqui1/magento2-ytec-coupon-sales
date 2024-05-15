@@ -31,6 +31,7 @@ interface CouponSaleInterface
     public const EXPIRES_AT = "expires_at";
     public const HISTORY = "history";
     public const SALES_ID = "sales_id";
+    public const COUPON_TYPE_CODE = "coupon_type_code";
     /**#@-*/
 
     /**
@@ -217,4 +218,20 @@ interface CouponSaleInterface
      * @return CouponSaleInterface
      */
     public function setSalesId(?string $salesId): CouponSaleInterface;
+
+    /**
+     * Getter for CouponTypeCode.
+     *
+     * @return string|null
+     */
+    public function getCouponTypeCode(): ?string;
+
+    /**
+     * Setter for CouponTypeCode.
+     *
+     * @param string|null $couponTypeCode
+     *
+     * @return CouponSaleInterface
+     */
+    public function setCouponTypeCode(?string $couponTypeCode): CouponSaleInterface;
 }

@@ -108,4 +108,12 @@ class CouponSaleOrder extends DataObject implements CouponSaleOrderInterface
 
         return array_map(fn(DataObject $item) => $item->getData(), $productDiscountUsage);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCouponTypeCode(): ?string
+    {
+        return (string)$this->getData(self::COUPON_TYPE_CODE);
+    }
 }

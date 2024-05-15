@@ -25,6 +25,7 @@ class CouponSaleData extends DataObject implements CouponSaleInterface
     public function getEntityId(): ?int
     {
         return $this->getData(self::ENTITY_ID) === null ? null
+
             : (int)$this->getData(self::ENTITY_ID);
     }
 
@@ -219,6 +220,23 @@ class CouponSaleData extends DataObject implements CouponSaleInterface
     public function setSalesId(?string $salesId): CouponSaleInterface
     {
         $this->setData(self::SALES_ID, $salesId);
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCouponTypeCode(): ?string
+    {
+        return $this->getData(self::COUPON_TYPE_CODE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCouponTypeCode(?string $couponTypeCode): CouponSaleInterface
+    {
+        $this->setData(self::COUPON_TYPE_CODE, $couponTypeCode);
         return $this;
     }
 }

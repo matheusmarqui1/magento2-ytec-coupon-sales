@@ -14,5 +14,19 @@
     "constraint": {
       "PRIMARY": true
     }
-  }
+  },
+    "ytec_couponsale_type": {
+        "column": {
+            "entity_id": true,
+            "code": true,
+            "label": true,
+            "is_active": true
+        },
+        "index": {
+            "YTEC_COUPONSALE_TYPE_ENTITY_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
 }

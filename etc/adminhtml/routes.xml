@@ -14,5 +14,8 @@
         <route id="ytec_couponsales" frontName="ytec_couponsales">
             <module name="Ytec_CouponSales"/>
         </route>
+        <route id="ytec_couponsales_type" frontName="ytec_couponsales_type">
+            <module name="Ytec_CouponSales"/>
+        </route>
     </router>
 </config>

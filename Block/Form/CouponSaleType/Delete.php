@@ -8,15 +8,16 @@
  */
 declare(strict_types=1);
 
-namespace Ytec\CouponSales\Block\Form\CouponSale;
+namespace Ytec\CouponSales\Block\Form\CouponSaleType;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-use Ytec\CouponSales\Api\Data\CouponSaleInterface;
+use Ytec\CouponSales\Api\Data\CouponSaleTypeInterface;
+use Ytec\CouponSales\Block\Form\CouponSale\GenericButton;
 
 /**
  * Class Delete
  * @package Ytec\CouponSales\Block\Form\CouponSale
- * Delete button for CouponSale form.
+ * Delete button for CouponSaleType form.
  */
 class Delete extends GenericButton implements ButtonProviderInterface
 {
@@ -36,10 +37,10 @@ class Delete extends GenericButton implements ButtonProviderInterface
             'delete',
             sprintf(
                 "deleteConfirm('%s', '%s')",
-                __('Are you sure you want to delete this coupon sale?'),
+                __('Are you sure you want to delete this coupon sale type?'),
                 $this->getUrl(
                     '*/*/delete',
-                    [CouponSaleInterface::ENTITY_ID => $this->getEntityId()]
+                    [CouponSaleTypeInterface::ENTITY_ID => $this->getEntityId()]
                 )
             ),
             [],

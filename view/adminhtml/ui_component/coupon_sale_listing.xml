@@ -81,6 +81,12 @@
                 <label translate="true">Code</label>
             </settings>
         </column>
+        <column name="coupon_type_code">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Coupon Type Code</label>
+            </settings>
+        </column>
         <column name="partner_name">
             <settings>
                 <filter>text</filter>

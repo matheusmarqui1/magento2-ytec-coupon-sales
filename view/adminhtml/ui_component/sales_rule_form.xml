@@ -56,6 +56,20 @@
                     </notice>
                 </settings>
             </field>
+            <field name="couponsale_coupon_type" sortOrder="20" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Ytec\CouponSales\Model\Config\Source\CouponType</item>
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">couponsale_coupon_type</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Coupon Sale Type</label>
+                    <dataScope>couponsale_coupon_type</dataScope>
+                    <notice translate="true">Select the type of coupons sales created within this rule. Updating this field won't affect the existing coupon sales created previously.</notice>
+                </settings>
+            </field>
         </fieldset>
     </fieldset>
 </form>

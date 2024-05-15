@@ -19,9 +19,11 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\SalesRule\Api\CouponRepositoryInterface;
 use Magento\SalesRule\Api\Data\CouponInterface;
 use Magento\SalesRule\Api\Data\CouponInterfaceFactory as CouponFactory;
+use Magento\SalesRule\Api\RuleRepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Ytec\CouponSales\Api\Data\CouponSaleInterface;
 use Ytec\CouponSales\Api\CouponSaleSaveValidatorInterface;
+use Ytec\CouponSales\Api\Data\RuleInterface;
 use Ytec\CouponSales\Model\Config\Source\Status;
 use Ytec\CouponSales\Model\CouponSaleModel;
 use Ytec\CouponSales\Model\CouponSaleModelFactory;
@@ -65,11 +67,17 @@ class SaveCommand
     private CouponFactory $couponFactory;
 
     /**
+     * @var RuleRepositoryInterface
+     */
+    private RuleRepositoryInterface $ruleRepository;
+
+    /**
      * @param LoggerInterface $logger
      * @param CouponSaleModelFactory $modelFactory
      * @param CouponSaleResource $resource
      * @param CouponSaleSaveValidatorInterface $couponSaleSaveValidator
      * @param CouponRepositoryInterface $couponRepository
+     * @param RuleRepositoryInterface $ruleRepository
      * @param CouponFactory $couponFactory
      */
     public function __construct(
@@ -78,6 +86,7 @@ class SaveCommand
         CouponSaleResource               $resource,
         CouponSaleSaveValidatorInterface $couponSaleSaveValidator,
         CouponRepositoryInterface        $couponRepository,
+        RuleRepositoryInterface          $ruleRepository,
         CouponFactory                    $couponFactory
     ) {
         $this->logger = $logger;
@@ -86,6 +95,7 @@ class SaveCommand
         $this->couponSaleSaveValidator = $couponSaleSaveValidator;
         $this->couponRepository = $couponRepository;
         $this->couponFactory = $couponFactory;
+        $this->ruleRepository = $ruleRepository;
     }
 
     /**
@@ -125,6 +135,7 @@ class SaveCommand
             $model->setHistory($couponSale->getHistory());
 
             $this->assignCodeForCouponSale($model);
+            $this->assignCouponTypeForCouponSale($model);
 
             $this->resource->save($model);
         } catch (AlreadyExistsException $exception) {
@@ -207,5 +218,21 @@ class SaveCommand
         } elseif ($model->getStatus() === Status::AVAILABLE) {
             $coupon->setTimesUsed(0);
         }
+    }
+
+    /**
+     * Assign coupon type for Coupon Sale.
+     *
+     * @throws NoSuchEntityException
+     * @throws LocalizedException
+     */
+    private function assignCouponTypeForCouponSale(CouponSaleModel $model): void
+    {
+        $relatedRuleId = $model->getData(CouponSaleInterface::RULE_ID);
+
+        /** @var RuleInterface $rule */
+        $rule = $this->ruleRepository->getById($relatedRuleId);
+
+        $model->setData(CouponSaleInterface::COUPON_TYPE_CODE, $rule->getCouponSaleCouponTypeCode());
     }
 }

@@ -23,7 +23,8 @@ interface RuleInterface extends MagentoRuleInterface
      * Constants defined for keys of the data array
      */
     public const IS_PARTNER_SALES_RULE = 'is_partner_sales_rule';
-    public const GIFTCARD_COUPON_TEMPLATE = 'couponsale_coupon_template';
+    public const COUPONSALE_COUPON_TEMPLATE = 'couponsale_coupon_template';
+    public const COUPONSALE_COUPON_TYPE_CODE = 'couponsale_coupon_type';
     /**#@-*/
 
     /**
@@ -55,4 +56,19 @@ interface RuleInterface extends MagentoRuleInterface
      * @return $this
      */
     public function setCouponSaleCouponTemplate(string $couponSaleCouponTemplate): self;
+
+    /**
+     * Get Coupon Sale coupon type code
+     *
+     * @return string|null
+     */
+    public function getCouponSaleCouponTypeCode(): ?string;
+
+    /**
+     * Set Coupon Sale coupon type code
+     *
+     * @param string $couponSaleCouponTypeCode
+     * @return $this
+     */
+    public function setCouponSaleCouponTypeCode(string $couponSaleCouponTypeCode): self;
 }

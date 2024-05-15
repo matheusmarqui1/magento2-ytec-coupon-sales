@@ -10,6 +10,19 @@
 -->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="ytec_couponsale_type" resource="default" engine="innodb" comment="CouponSaleType">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity Id Column"/>
+        <column xsi:type="varchar" name="code" nullable="false" length="255" comment="Code Column"/>
+        <column xsi:type="varchar" name="label" nullable="false" length="255" comment="Label Column"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Active Column"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="YTEC_COUPONSALE_TYPE_ENTITY_ID" indexType="btree">
+            <column name="entity_id"/>
+        </index>
+    </table>
     <table name="ytec_couponsale" resource="default" engine="innodb" comment="CouponSale">
         <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
                 comment="Entity Id Column"/>
@@ -30,6 +43,8 @@
         <column xsi:type="datetime" name="expires_at" nullable="true" default="NULL"
                 comment="Expires At Column"/>
         <column xsi:type="text" name="history" nullable="true" comment="History Column"/>
+        <column xsi:type="varchar" name="coupon_type_code" nullable="true" length="255"
+                comment="Coupon Sale Coupon Type Code Column"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
@@ -51,6 +66,7 @@
     <table name="salesrule">
         <column xsi:type="int" name="is_partner_sales_rule" padding="10" unsigned="true" nullable="false" identity="false"
                 comment="Is Partner Sales Rule Column"/>
-        <column xsi:type="varchar" name="couponsale_coupon_template" nullable="false" length="255" comment="CouponSale Coupon Template Column"/>
+        <column xsi:type="varchar" name="couponsale_coupon_template" nullable="true" length="255" comment="CouponSale Coupon Template Column"/>
+        <column xsi:type="varchar" name="couponsale_coupon_type" nullable="true" length="255" comment="CouponSale Coupon Type Column"/>
     </table>
 </schema>

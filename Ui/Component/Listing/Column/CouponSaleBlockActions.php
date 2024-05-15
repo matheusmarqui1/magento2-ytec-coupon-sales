@@ -26,13 +26,18 @@ class CouponSaleBlockActions extends Column
     /**
      * Entity name.
      */
-    private const ENTITY_NAME = 'Coupon Sale';
+    protected const ENTITY_NAME = 'Coupon Sale';
+
+    /**
+     * Entity id field.
+     */
+    protected const ENTITY_ID = CouponSaleInterface::ENTITY_ID;
 
     /**
      * Url paths.
      */
-    private const EDIT_URL_PATH = 'ytec_couponsales/couponsale/edit';
-    private const DELETE_URL_PATH = 'ytec_couponsales/couponsale/delete';
+    protected const EDIT_URL_PATH = 'ytec_couponsales/couponsale/edit';
+    protected const DELETE_URL_PATH = 'ytec_couponsales/couponsale/delete';
 
     /**
      * @var UrlInterface

@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright © 2024 Ytec. All rights reserved.
+*
+* @package    Ytec
+* @moduleName CouponSales
+* @author     Matheus Marqui <matheus.701@live.com>
+*/
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">coupon_sale_type_listing.coupon_sale_type_listing_data_source</item>
+            <item name="deps" xsi:type="string">coupon_sale_type_listing.coupon_sale_type_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New</label>
+            </button>
+        </buttons>
+        <spinner>coupon_sale_type_listing_columns</spinner>
+        <deps>
+            <dep>coupon_sale_type_listing.coupon_sale_type_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="coupon_sale_type_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Ytec_CouponSales::type_management</aclResource>
+        <dataProvider class="Ytec\CouponSales\Ui\DataProvider\CouponSaleTypeDataProvider"
+                      name="coupon_sale_type_listing_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <filters name="listing_filters"/>
+    </listingToolbar>
+    <columns name="coupon_sale_type_listing_columns">
+        <column name="entity_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="code">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Code</label>
+            </settings>
+        </column>
+        <column name="label">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Label</label>
+            </settings>
+        </column>
+        <column name="is_active">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Is Active</label>
+            </settings>
+        </column>
+        <column name="is_active" component="Ytec_CouponSales/js/grid/columns/is-active">
+            <settings>
+                <label translate="true">Status</label>
+                <dataType>select</dataType>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Ytec\CouponSales\Ui\Component\Listing\Column\CouponSaleTypeBlockActions">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>
