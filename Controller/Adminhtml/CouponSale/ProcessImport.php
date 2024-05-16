@@ -109,10 +109,10 @@ class ProcessImport extends BackendAction implements HttpPostActionInterface, Ht
 
     /**
      * @param CouponSaleImportResultInterface $importResult
-     * @param mixed $importBehavior
+     * @param string $importBehavior
      * @return Forward
      */
-    public function forward(CouponSaleImportResultInterface $importResult, mixed $importBehavior): Forward
+    public function forward(CouponSaleImportResultInterface $importResult, string $importBehavior): Forward
     {
         $forward = $this->resultFactory->create(ResultFactory::TYPE_FORWARD);
 
