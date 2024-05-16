@@ -1,0 +1,81 @@
+<?php
+/**
+ * @var $block \Magento\Framework\View\Element\Template
+ * @var $importResult \Ytec\CouponSales\Api\Data\CouponSaleImportResultInterface
+ */
+$importResult = $block->getData('import_result');
+?>
+<div class="import-details">
+    <h3><?= __('Unfortunately, the import process was not completely successful.') ?></h3>
+    <p><?= __('But don\'t worry, here are all the import results and errors, so you can fix them ☺️.') ?></p>
+    <section class="import-details-focus-zone">
+        <div class="fieldset-wrapper import-information">
+            <div class="fieldset-wrapper-title">
+                <span class="title"><?= __('Import Information') ?></span>
+            </div>
+            <table class="admin__table-secondary">
+                <tbody>
+                <tr>
+                    <th><?= __('Import Type:') ?></th>
+                    <td><?= $block->escapeHtml($block->getData('import_behavior')) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Processed Rows:') ?></th>
+                    <td><?= $importResult->getImportedRowsQuantity() ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Rows with errors:') ?></th>
+                    <td><?= $importResult->getErrorRowsQuantity() ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Total Rows:') ?></th>
+                    <td><?= $importResult->getTotalRowsQuantity() ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Is complete success:') ?></th>
+                    <td><?= $importResult->getIsCompleteSuccess() ? __('Yes') : __('No') ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Success Rate:') ?></th>
+                    <td><?= round(($importResult->getImportedRowsQuantity() / $importResult->getTotalRowsQuantity()) * 100, 2) ?>%</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="fieldset-wrapper import-errors" style="margin-top: 20px;">
+            <div class="fieldset-wrapper-title">
+                <span class="title"><?= __('Import Errors') ?></span>
+            </div>
+            <?php if ($importResult->getErrorRowsQuantity() > 0): ?>
+                <table class="admin__table-secondary">
+                    <thead>
+                    <tr>
+                        <th><?= __('Row Number') ?></th>
+                        <th><?= __('Coupon Sale Code') ?></th>
+                        <th><?= __('Error Message') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($importResult->getErrors() as $error): ?>
+                        <tr>
+                            <td><?= $error['row_number'] + 1 ?></td>
+                            <td><?= $block->escapeHtml($error['coupon_sale_code']) ?></td>
+                            <td style="color: #b5321c; font-weight: bold;"><?= $block->escapeHtml($error['error_message']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p><?= __('No errors found.') ?></p>
+            <?php endif; ?>
+        </div>
+        <div class="import-details-actions" style="margin-top: 20px;">
+            <a href="<?= $block->getUrl('*/*/import') ?>" class="action-default" style="margin-right: 10px;">
+                <?= __('Back to Import') ?>
+            </a>
+            <a href="<?= $block->getUrl('*/*/index') ?>" class="action-default">
+                <?= __('Back to Listing') ?>
+            </a>
+        </div>
+    </section>
+</div>

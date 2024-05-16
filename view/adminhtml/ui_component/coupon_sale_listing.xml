@@ -23,6 +23,11 @@
                 <class>primary</class>
                 <label translate="true">Add New</label>
             </button>
+            <button name="import">
+                <url path="*/*/import"/>
+                <class>secondary</class>
+                <label translate="true">Import</label>
+            </button>
         </buttons>
         <spinner>coupon_sale_listing_columns</spinner>
         <deps>
@@ -47,11 +52,54 @@
     <listingToolbar name="listing_top">
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
-        <filterSearch name="fulltext"/>
         <filters name="listing_filters"/>
         <paging name="listing_paging"/>
+        <exportButton class="Magento\Ui\Component\ExportButton" component="Magento_Ui/js/grid/export" displayArea="dataGridActions">
+            <settings>
+                <options>
+                    <option name="csv" xsi:type="array">
+                        <item name="value" xsi:type="string">csv</item>
+                        <item name="label" xsi:type="string" translate="true">CSV</item>
+                        <item name="url" xsi:type="string">mui/export/GridToCsv</item>
+                    </option>
+                </options>
+            </settings>
+        </exportButton>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="*/*/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to disable selected items?</message>
+                        <title translate="true">Disable items</title>
+                    </confirm>
+                    <url path="*/*/massDisable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
+        </massaction>
     </listingToolbar>
     <columns name="coupon_sale_listing_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">5</item>
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
         <column name="entity_id">
             <settings>
                 <filter>textRange</filter>
@@ -100,9 +148,11 @@
                 <dataType>price</dataType>
             </settings>
         </column>
-        <column name="sales_id" class="Ytec\CouponSales\Ui\Component\Listing\Column\SalesId">
+        <column name="sales_id">
             <settings>
+                <filter>text</filter>
                 <label translate="true">Sales ID</label>
+                <dataType>text</dataType>
             </settings>
         </column>
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">

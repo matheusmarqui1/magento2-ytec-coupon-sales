@@ -66,8 +66,17 @@ class CouponSaleSaveValidator implements CouponSaleSaveValidatorInterface
             throw new LocalizedException(__('Partner sales price must be greater than 0.'));
         }
 
-        /** @var \Ytec\CouponSales\Api\Data\RuleInterface $rule */
-        $rule = $this->getRelatedRule($couponSale->getRuleId());
+        try {
+            /** @var \Ytec\CouponSales\Api\Data\RuleInterface $rule */
+            $rule = $this->getRelatedRule($couponSale->getRuleId());
+        } catch (NoSuchEntityException $ex) {
+            throw new LocalizedException(
+                __(
+                    'Related rule with ID "%1" does not exist.',
+                    $couponSale->getRuleId()
+                )
+            );
+        }
 
         if (false === (bool)$rule->getIsPartnerSalesRule()) {
             throw new LocalizedException(__('Related rule must be marked as partner sales rule.'));
@@ -89,6 +98,7 @@ class CouponSaleSaveValidator implements CouponSaleSaveValidatorInterface
 
         if (
             $couponSale->getStatus() === Status::AVAILABLE &&
+            !empty($couponSale->getExpiresAt()) &&
             $couponSale->getExpiresAt() < (new \DateTime())->format('Y-m-d H:i:s')
         ) {
             throw new LocalizedException(

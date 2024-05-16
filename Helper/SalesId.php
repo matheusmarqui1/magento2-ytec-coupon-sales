@@ -8,13 +8,9 @@
  */
 declare(strict_types=1);
 
-namespace Ytec\CouponSales\Ui\Component\Listing\Column;
+namespace Ytec\CouponSales\Helper;
 
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\View\Element\UiComponent\ContextInterface;
-use Magento\Framework\View\Element\UiComponentFactory;
-use Magento\Ui\Component\Listing\Columns\Column;
-use Ytec\CouponSales\Api\Data\CouponSaleInterface;
 use Ytec\CouponSales\Model\Config\ModuleConfiguration;
 
 /**
@@ -22,42 +18,18 @@ use Ytec\CouponSales\Model\Config\ModuleConfiguration;
  * @package Ytec\CouponSales\Ui\Component\Listing\Column
  * SalesId column for CouponSales listing.
  */
-class SalesId extends Column
+class SalesId
 {
-    /**
-     * Sales id column.
-     */
-    public const SALES_ID = 'sales_id';
-
     /**
      * @var ModuleConfiguration
      */
     private ModuleConfiguration $moduleConfiguration;
 
     public function __construct(
-        ContextInterface $context,
-        UiComponentFactory $uiComponentFactory,
         ModuleConfiguration $moduleConfiguration,
-        array $components = [],
-        array $data = []
     ) {
-        parent::__construct($context, $uiComponentFactory, $components, $data);
         $this->moduleConfiguration = $moduleConfiguration;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function prepareDataSource(array $dataSource): array
-    {
-        if (isset($dataSource['data']['items'])) {
-            foreach ($dataSource['data']['items'] as &$item) {
-                $item[static::SALES_ID] = $this->getSalesId($item[CouponSaleInterface::CODE]) ?? 'N/A';
-            }
-        }
-        return $dataSource;
-    }
-
 
     /**
      * Get sales id from coupon code.
@@ -65,11 +37,15 @@ class SalesId extends Column
      * @param string $code
      * @return string|null
      */
-    public function getSalesId(string $code): ?string
+    public function get(string $code): ?string
     {
         try {
             $pattern = $this->moduleConfiguration->getSalesIdRegex();
         } catch (NoSuchEntityException $exception) {
+            /**
+             * Default pattern for sales id.
+             * It will match the last 6 digits of the code.
+             */
             $pattern = '/\d{6}(?=\D*$)/';
         }
         $matches = [];

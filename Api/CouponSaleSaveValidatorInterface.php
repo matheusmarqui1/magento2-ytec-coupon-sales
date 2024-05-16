@@ -26,7 +26,6 @@ interface CouponSaleSaveValidatorInterface
      *
      * @param CouponSaleInterface $couponSale
      * @return void
-     * @throws NoSuchEntityException If Coupon Sale rule does not exist.
      * @throws LocalizedException If validation fails.
      */
     public function validate(CouponSaleInterface $couponSale): void;

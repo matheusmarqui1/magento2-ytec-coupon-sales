@@ -41,6 +41,14 @@
                     <comment>Regex to extract the Sales ID sent by partner.</comment>
                 </field>
             </group>
+            <group id="import" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Import Configuration</label>
+                <field id="required_fields" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Required Fields</label>
+                    <source_model>Ytec\CouponSales\Model\Config\Source\ImportRequiredField</source_model>
+                    <comment>Fields that are required to import a coupon sale. Note that some fields are automatically generated or deducted and importing them will not cause any effect.</comment>
+                </field>
+            </group>
             <group id="endpoints" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>API Endpoints</label>
                 <group id="create_voucher" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">

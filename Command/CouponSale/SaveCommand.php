@@ -28,6 +28,7 @@ use Ytec\CouponSales\Model\Config\Source\Status;
 use Ytec\CouponSales\Model\CouponSaleModel;
 use Ytec\CouponSales\Model\CouponSaleModelFactory;
 use Ytec\CouponSales\Model\ResourceModel\CouponSaleResource;
+use Ytec\CouponSales\Helper\SalesId;
 
 /**
  * Class SaveCommand
@@ -72,6 +73,11 @@ class SaveCommand
     private RuleRepositoryInterface $ruleRepository;
 
     /**
+     * @var SalesId
+     */
+    private SalesId $salesId;
+
+    /**
      * @param LoggerInterface $logger
      * @param CouponSaleModelFactory $modelFactory
      * @param CouponSaleResource $resource
@@ -79,6 +85,7 @@ class SaveCommand
      * @param CouponRepositoryInterface $couponRepository
      * @param RuleRepositoryInterface $ruleRepository
      * @param CouponFactory $couponFactory
+     * @param SalesId $salesId
      */
     public function __construct(
         LoggerInterface                  $logger,
@@ -87,7 +94,8 @@ class SaveCommand
         CouponSaleSaveValidatorInterface $couponSaleSaveValidator,
         CouponRepositoryInterface        $couponRepository,
         RuleRepositoryInterface          $ruleRepository,
-        CouponFactory                    $couponFactory
+        CouponFactory                    $couponFactory,
+        SalesId                          $salesId
     ) {
         $this->logger = $logger;
         $this->modelFactory = $modelFactory;
@@ -96,6 +104,7 @@ class SaveCommand
         $this->couponRepository = $couponRepository;
         $this->couponFactory = $couponFactory;
         $this->ruleRepository = $ruleRepository;
+        $this->salesId = $salesId;
     }
 
     /**
@@ -114,7 +123,8 @@ class SaveCommand
         try {
             /** @var CouponSaleModel|CouponSaleInterface $model */
             $model = $this->modelFactory->create();
-            $model->addData($couponSale->getData());
+            $model->addData($couponSale->getData())
+                ->setSalesId($this->salesId->get($model->getCode()));
             $model->setHasDataChanges(true);
 
             if (!$model->getData(CouponSaleInterface::ENTITY_ID)) {

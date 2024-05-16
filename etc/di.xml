@@ -32,4 +32,8 @@
                 type="Ytec\CouponSales\Model\CouponSaleRuleManagement"/>
     <preference for="Ytec\CouponSales\Api\Data\CouponSaleTypeInterface"
                 type="Ytec\CouponSales\Model\Data\CouponSaleTypeData"/>
+    <preference for="Ytec\CouponSales\Api\CouponSaleCsvImporterInterface"
+                type="Ytec\CouponSales\Model\CouponSaleCsvImporter"/>
+    <preference for="Ytec\CouponSales\Api\Data\CouponSaleImportResultInterface"
+                type="Ytec\CouponSales\Model\Data\CouponSaleImportResult"/>
 </config>

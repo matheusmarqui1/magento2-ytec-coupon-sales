@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright © 2024 Ytec. All rights reserved.
+*
+* @package    Ytec
+* @moduleName CouponSales
+* @author     Matheus Marqui <matheus.701@live.com>
+*/
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">coupon_sale_import_form.coupon_sale_import_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Coupon Sale Creation</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <namespace>coupon_sale_import_form</namespace>
+        <dataScope>data.general</dataScope>
+        <deps>
+            <dep>coupon_sale_import_form.coupon_sale_import_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="save" class="Ytec\CouponSales\Block\Form\CouponSale\Save"/>
+            <button name="back" class="Ytec\CouponSales\Block\Form\CouponSale\Back"/>
+            <button name="delete" class="Ytec\CouponSales\Block\Form\CouponSale\Delete"/>
+        </buttons>
+    </settings>
+    <dataSource name="coupon_sale_import_form_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="*/*/processImport"/>
+        </settings>
+        <dataProvider class="Ytec\CouponSales\Ui\DataProvider\CouponSaleDataProvider" name="coupon_sale_import_form_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label translate="true">General Import Details</label>
+        </settings>
+        <field name="import_behavior" sortOrder="0" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ytec\CouponSales\Model\Config\Source\ImportBehavior</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">import_behavior</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Import Behavior</label>
+                <dataScope>import_behavior</dataScope>
+            </settings>
+        </field>
+        <file name="import_file">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">import_file</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Import File</label>
+                <dataScope>import_file</dataScope>
+            </settings>
+        </file>
+    </fieldset>
+    <htmlContent name="tutorial">
+        <block name="tutorial_content" template="Ytec_CouponSales::import/tutorial.phtml">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Ytec\CouponSales\ViewModel\ImportTutorialViewModel</argument>
+            </arguments>
+        </block>
+    </htmlContent>
+</form>

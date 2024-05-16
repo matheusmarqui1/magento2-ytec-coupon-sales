@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2024 Ytec. All rights reserved.
+ *
+ * @package    Ytec
+ * @moduleName CouponSales
+ * @author     Matheus Marqui <matheus.701@live.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Import Error Details</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block name="coupon_sales_import_error_details" template="Ytec_CouponSales::import/error_details.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

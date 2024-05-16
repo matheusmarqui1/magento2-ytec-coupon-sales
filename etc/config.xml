@@ -10,6 +10,9 @@
                 <make_coupon_sale_available_on_cancel>1</make_coupon_sale_available_on_cancel>
                 <sales_id_regex>/\d{6}(?=\D*$)/</sales_id_regex>
             </general>
+            <import>
+                <required_fields>rule_id,code,status,partner_name,partner_sales_price</required_fields>
+            </import>
             <endpoints>
                 <create_voucher>
                     <enable>1</enable>

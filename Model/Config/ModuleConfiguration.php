@@ -105,6 +105,17 @@ class ModuleConfiguration implements ModuleConfigurationInterface
      * {@inheritdoc}
      * @throws NoSuchEntityException
      */
+    public function getImportRequiredFields(): array
+    {
+        $fields = $this->configurationManager->get(static::XML_PATH_IMPORT_REQUIRED_FIELDS);
+
+        return explode(',', $fields);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @throws NoSuchEntityException
+     */
     public function isBulkDisableVoucherEndpointEnabled(): bool
     {
         return $this->configurationManager->isOn(static::XML_PATH_ENDPOINTS_BULK_DISABLE_VOUCHER_ENABLE);

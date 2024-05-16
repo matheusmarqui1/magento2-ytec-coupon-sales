@@ -30,6 +30,12 @@ interface ModuleConfigurationInterface
     /**#@-*/
 
     /**#@+
+     * Coupon Sale import configuration keys.
+     */
+    public const XML_PATH_IMPORT_REQUIRED_FIELDS = 'ytec_couponsales/import/required_fields';
+    /**#@-*/
+
+    /**#@+
      * Coupon Sale endpoints configuration keys.
      */
     public const XML_PATH_ENDPOINTS_CREATE_VOUCHER_ENABLE = 'ytec_couponsales/endpoints/create_voucher/enable';
@@ -75,6 +81,13 @@ interface ModuleConfigurationInterface
      * @return string
      */
     public function getSalesIdRegex(): string;
+
+    /**
+     * Get the required fields for import.
+     *
+     * @return array
+     */
+    public function getImportRequiredFields(): array;
 
     /**
      * Check if create voucher endpoint is enabled.

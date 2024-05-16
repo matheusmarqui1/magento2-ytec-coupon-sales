@@ -10,8 +10,6 @@ declare(strict_types=1);
 
 namespace Ytec\CouponSales\Api;
 
-use Ytec\Base\Api\Rest\RestResponseInterface;
-
 /**
  * Interface CouponSaleRuleManagementInterface
  * @package Ytec\CouponSales\Api
@@ -31,13 +29,13 @@ interface CouponSaleRuleManagementInterface
     /**
      * Get Coupon Sale Rule by ID.
      * @param int $ruleId
-     * @return RestResponseInterface
+     * @return \Ytec\Base\Api\Rest\RestResponseInterface
      */
     public function getById(int $ruleId): \Ytec\Base\Api\Rest\RestResponseInterface;
 
     /**
      * Get Coupon Sale Rule listing.
-     * @return RestResponseInterface
+     * @return \Ytec\Base\Api\Rest\RestResponseInterface
      */
     public function getListing(): \Ytec\Base\Api\Rest\RestResponseInterface;
 }

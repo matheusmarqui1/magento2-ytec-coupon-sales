@@ -1,0 +1,65 @@
+<?php
+/**
+ * @var $block \Magento\Framework\View\Element\Template
+ * @var $viewModel \Ytec\CouponSales\ViewModel\ImportTutorialViewModel
+ */
+
+$viewModel = $block->getData('view_model');
+?>
+
+<section class="tutorial" style="margin-top: 20px;">
+    <h3 style="color: #333; font-size: 24px; margin-bottom: 15px;"><?= __('Tutorial') ?></h3>
+    <p style="font-size: 16px;"><?= __('Hello, welcome to the tutorial of the Coupon Sales Importer! 🎉') ?></p>
+    <ul style="list-style-type: none; padding-left: 0; font-size: 16px;">
+        <li style="margin-bottom: 20px;">
+            <strong><?= __('Step 1: Create a CSV file with the following columns:') ?></strong>
+            <div class="fieldset-wrapper required-columns" style="margin-top: 10px;">
+                <table class="admin__table-secondary" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                    <tr>
+                        <th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;"><?= __('Required Columns') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($viewModel->getRequiredColumns() as $requiredColumn): ?>
+                        <tr>
+                            <td style="padding: 8px; border-bottom: 1px solid #ddd;"><?= $requiredColumn ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <small style="font-size: 14px;"><?= __('Note: You can add more columns to your CSV file, but the columns listed above are required, the required columns are defined in the module configuration.') ?></small>
+            </div>
+            <div>
+                <a href="<?= $block->getUrl('*/*/ImportCsvSample') ?>" class="action-download secondary">
+                    <?= __('Download Sample CSV') ?>
+                </a>
+            </div>
+        </li>
+        <li style="margin-bottom: 20px;">
+            <strong><?= __('Step 2: Select the available import behavior:') ?></strong>
+            <div class="fieldset-wrapper import-behavior" style="margin-top: 10px;">
+                <table class="admin__table-secondary" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                    <tr>
+                        <th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;"><?= __('Behavior Value') ?></th>
+                        <th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;"><?= __('Behavior Description') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($viewModel->getAvailableImportBehaviors() as $importBehavior): ?>
+                        <tr>
+                            <td style="padding: 8px; border-bottom: 1px solid #ddd;"><?= $importBehavior['value'] ?></td>
+                            <td style="padding: 8px; border-bottom: 1px solid #ddd;"><?= $importBehavior['label'] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+        <li style="margin-bottom: 10px;"><?= __('Step 3: Upload your CSV with the desired coupon sales.') ?></li>
+        <li style="margin-bottom: 10px;"><?= __('Step 4: Click on "Save".') ?></li>
+        <li style="margin-bottom: 10px;"><?= __('Step 5: Wait for the import process to finish.') ?></li>
+        <li><?= __('Step 6: If any errors occur, you will be presented with a list of errors. Fix them and try again with the failed entities.') ?></li>
+    </ul>
+</section>
