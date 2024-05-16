@@ -60,7 +60,7 @@ class AddCouponSaleDataToOrdersApi
         CouponSaleRepositoryInterface $couponSaleRepository,
         OrderExtensionFactory $orderExtensionFactory,
         CouponSaleOrderInterfaceFactory $couponSaleOrderFactory,
-        ProductDiscountUsage $productDiscountUsage,
+        ProductDiscountUsage $productDiscountUsage
     ) {
         $this->couponSaleRepository = $couponSaleRepository;
         $this->orderExtensionFactory = $orderExtensionFactory;

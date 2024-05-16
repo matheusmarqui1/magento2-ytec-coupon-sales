@@ -26,7 +26,7 @@ class SalesId
     private ModuleConfiguration $moduleConfiguration;
 
     public function __construct(
-        ModuleConfiguration $moduleConfiguration,
+        ModuleConfiguration $moduleConfiguration
     ) {
         $this->moduleConfiguration = $moduleConfiguration;
     }

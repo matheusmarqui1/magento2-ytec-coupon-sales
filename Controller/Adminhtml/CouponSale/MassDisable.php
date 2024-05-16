@@ -15,13 +15,11 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Ui\Component\MassAction\Filter as MassActionFilter;
 use Ytec\CouponSales\Model\Config\Source\Status;
 use Ytec\CouponSales\Model\CouponSaleModel;
 use Ytec\CouponSales\Api\CouponSaleRepositoryInterface;
 use Ytec\CouponSales\Api\Data\CouponSaleInterfaceFactory;
-use Ytec\CouponSales\Model\ResourceModel\CouponSaleModel\CouponSaleCollection;
 use Ytec\CouponSales\Model\ResourceModel\CouponSaleModel\CouponSaleCollectionFactory;
 
 /**
@@ -70,7 +68,7 @@ class MassDisable extends BackendAction implements HttpPostActionInterface, Http
         MassActionFilter $massActionFilter,
         CouponSaleCollectionFactory $collectionFactory,
         CouponSaleRepositoryInterface $couponSaleRepository,
-        CouponSaleInterfaceFactory $couponSaleInterfaceFactory,
+        CouponSaleInterfaceFactory $couponSaleInterfaceFactory
     ) {
         parent::__construct($context);
         $this->massActionFilter = $massActionFilter;
