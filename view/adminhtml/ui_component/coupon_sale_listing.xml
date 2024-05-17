@@ -97,6 +97,8 @@
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
                     <item name="resizeDefaultWidth" xsi:type="string">5</item>
                     <item name="indexField" xsi:type="string">entity_id</item>
+                    <item name="sortOrder" xsi:type="number">0</item>
+                    <item name="draggable" xsi:type="boolean">true</item>
                 </item>
             </argument>
         </selectionsColumn>

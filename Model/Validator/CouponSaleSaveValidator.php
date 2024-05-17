@@ -70,11 +70,12 @@ class CouponSaleSaveValidator implements CouponSaleSaveValidatorInterface
             /** @var \Ytec\CouponSales\Api\Data\RuleInterface $rule */
             $rule = $this->getRelatedRule($couponSale->getRuleId());
         } catch (NoSuchEntityException $ex) {
-            throw new LocalizedException(
+            throw new NoSuchEntityException(
                 __(
                     'Related rule with ID "%1" does not exist.',
                     $couponSale->getRuleId()
-                )
+                ),
+                $ex
             );
         }
 

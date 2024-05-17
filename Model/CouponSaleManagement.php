@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Ytec\CouponSales\Model;
 
+use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
@@ -134,12 +135,22 @@ class CouponSaleManagement implements CouponSaleManagementInterface
         }
 
         try {
-            $couponSale = $this->couponSaleRepository->getCouponSaleByCode($code);
-            $this->couponSaleRepository->delete($couponSale);
+            /** @var CouponSaleModel|CouponSaleInterface $couponSaleModel */
+            $couponSaleModel = $this->couponSaleRepository->getCouponSaleByCode($code);
+
+            if ($couponSaleModel->getStatus() === Status::USED) {
+                throw new CouldNotDeleteException(__(self::COUPON_SALE_ALREADY_USED_MESSAGE, $code));
+            }
+
+            $this->couponSaleRepository->delete($couponSaleModel);
             return $this->restResponse->noContent();
         } catch (NoSuchEntityException $ex) {
             return $this->restResponse->notFound([
                 'message' => __(self::COUPON_SALE_NOT_FOUND_MESSAGE, $code)
+            ]);
+        } catch (CouldNotDeleteException $exception) {
+            return $this->restResponse->badRequest([
+                'message' => $exception->getMessage()
             ]);
         } catch (\Exception $ex) {
             return $this->restResponse->internalError([
