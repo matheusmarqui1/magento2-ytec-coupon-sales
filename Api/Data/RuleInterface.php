@@ -62,7 +62,7 @@ interface RuleInterface extends MagentoRuleInterface
      *
      * @return string|null
      */
-    public function getCouponSaleCouponTypeCode(): ?string;
+    public function getCouponTypeCode(): ?string;
 
     /**
      * Set Coupon Sale coupon type code

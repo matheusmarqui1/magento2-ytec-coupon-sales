@@ -20,7 +20,7 @@
              sortOrder="10" module="Ytec_CouponSales" parent="Ytec_CouponSales::promo_couponsales"
              action="ytec_couponsales/couponsale/index" dependsOnModule="Ytec_CouponSales"
              resource="Ytec_CouponSales::management"/>
-        <add id="Ytec_CouponSales::type_management" sortOrder="30" title="Coupon Sale Type" module="Ytec_CouponSales"
+        <add id="Ytec_CouponSales::type_management" sortOrder="30" title="Coupon Type" module="Ytec_CouponSales"
              parent="Ytec_CouponSales::promo_couponsales" resource="Ytec_CouponSales::type_management" translate="title"
              action="ytec_couponsales_type/couponsaletype/index"/>
         <add id="Ytec_CouponSales::import" sortOrder="30" title="Import" module="Ytec_CouponSales"

@@ -39,14 +39,6 @@ class CouponSaleOrder extends DataObject implements CouponSaleOrderInterface
     /**
      * {@inheritDoc}
      */
-    public function getCode(): ?string
-    {
-        return (string)$this->getData(self::CODE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getPartnerSalesPrice(): ?float
     {
         return (float)$this->getData(self::PARTNER_SALES_PRICE);
@@ -97,23 +89,5 @@ class CouponSaleOrder extends DataObject implements CouponSaleOrderInterface
     public function getSalesId(): ?string
     {
         return (string)$this->getData(self::SALES_ID);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getProductDiscountUsage(): ?array
-    {
-        $productDiscountUsage = $this->getData(self::PRODUCT_DISCOUNT_USAGE);
-
-        return array_map(fn(DataObject $item) => $item->getData(), $productDiscountUsage);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCouponTypeCode(): ?string
-    {
-        return (string)$this->getData(self::COUPON_TYPE_CODE);
     }
 }

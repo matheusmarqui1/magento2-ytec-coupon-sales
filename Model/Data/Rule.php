@@ -55,7 +55,7 @@ class Rule extends MagentoRule implements RuleInterface
     /**
      * {@inheritDoc}
      */
-    public function getCouponSaleCouponTypeCode(): ?string
+    public function getCouponTypeCode(): ?string
     {
         return $this->_get(self::COUPONSALE_COUPON_TYPE_CODE);
     }

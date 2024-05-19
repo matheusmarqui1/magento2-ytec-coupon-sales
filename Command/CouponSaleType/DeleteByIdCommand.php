@@ -80,16 +80,24 @@ class DeleteByIdCommand
                 );
             }
 
+            if ($model->getData(CouponSaleTypeInterface::CODE) === 'default') {
+                throw new CouldNotDeleteException(
+                    __('You can\'t delete the default coupon type.')
+                );
+            }
+
             $this->resource->delete($model);
         } catch (Exception $exception) {
             $this->logger->error(
-                __('Could not delete CouponSaleType. Original message: {message}'),
+                __('Could not delete Coupon Type. Original message: {message}'),
                 [
                     'message' => $exception->getMessage(),
                     'exception' => $exception
                 ]
             );
-            throw new CouldNotDeleteException(__('Could not delete CouponSaleType.'));
+            throw new CouldNotDeleteException(
+                __('Could not delete Coupon Type: %1', $exception->getMessage())
+            );
         }
     }
 }

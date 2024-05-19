@@ -14,7 +14,7 @@
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">coupon_sale_type_form.coupon_sale_type_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">Coupon Sale Type</item>
+        <item name="label" xsi:type="string" translate="true">Coupon Type</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
@@ -87,7 +87,7 @@
                 <dataType>string</dataType>
                 <label translate="true">Label</label>
                 <dataScope>label</dataScope>
-                <notice>Label is used to display the coupon sale type in the admin panel. Such as 'Affiliate Coupon Sales'.</notice>
+                <notice>Label is used to display the Coupon Type in the admin panel. Such as 'Affiliate Coupon Sales'.</notice>
             </settings>
         </field>
         <field name="is_active" sortOrder="20" formElement="checkbox">
@@ -100,7 +100,7 @@
                 <dataType>bool</dataType>
                 <label translate="true">Is Active</label>
                 <dataScope>is_active</dataScope>
-                <notice>If set to Off, it won't be selectable on sales rule edit page.</notice>
+                <notice>If set to NO, it will appear as disabled in the sales rule creation/editing form.</notice>
             </settings>
             <formElements>
                 <checkbox>

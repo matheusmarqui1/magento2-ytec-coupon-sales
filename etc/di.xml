@@ -28,6 +28,8 @@
                 type="Ytec\CouponSales\Model\Config\ModuleConfiguration"/>
     <preference for="Ytec\CouponSales\Api\Data\CouponSaleOrderInterface"
                 type="Ytec\CouponSales\Model\Data\CouponSaleOrder"/>
+    <preference for="Ytec\CouponSales\Api\Data\CouponUsageOrderExtensionInterface"
+                type="Ytec\CouponSales\Model\Data\CouponUsageOrderExtension"/>
     <preference for="Ytec\CouponSales\Api\CouponSaleRuleManagementInterface"
                 type="Ytec\CouponSales\Model\CouponSaleRuleManagement"/>
     <preference for="Ytec\CouponSales\Api\Data\CouponSaleTypeInterface"
@@ -36,4 +38,12 @@
                 type="Ytec\CouponSales\Model\CouponSaleCsvImporter"/>
     <preference for="Ytec\CouponSales\Api\Data\CouponSaleImportResultInterface"
                 type="Ytec\CouponSales\Model\Data\CouponSaleImportResult"/>
+    <preference for="Magento\SalesRule\Api\Data\CouponInterface"
+                type="Ytec\CouponSales\Api\Data\CouponInterface"/>
+    <preference for="Ytec\CouponSales\Api\Data\CouponInterface"
+                type="Ytec\CouponSales\Model\Data\Coupon"/>
+    <type name="Magento\SalesRule\Model\Spi\CouponResourceInterface">
+        <plugin name="Ytec_CouponSales_Add_Custom_Coupon_Type_On_Coupon"
+                type="Ytec\CouponSales\Plugin\AddCustomCouponTypeOnCouponPlugin"/>
+    </type>
 </config>

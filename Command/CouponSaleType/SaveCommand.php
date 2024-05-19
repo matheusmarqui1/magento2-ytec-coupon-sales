@@ -73,16 +73,21 @@ class SaveCommand
             if (!$model->getData(CouponSaleTypeInterface::ENTITY_ID)) {
                 $model->isObjectNew(true);
             }
+
+            if (!$model->isObjectNew() && $model->getData(CouponSaleTypeInterface::CODE) === 'default') {
+                throw new CouldNotSaveException(__('You can\'t update the default Coupon Type.'));
+            }
+
             $this->resource->save($model);
         } catch (Exception $exception) {
             $this->logger->error(
-                __('Could not save CouponSaleType. Original message: {message}'),
+                __('Could not save Coupon Type. Original message: {message}'),
                 [
                     'message' => $exception->getMessage(),
                     'exception' => $exception
                 ]
             );
-            throw new CouldNotSaveException(__('Could not save CouponSaleType.'));
+            throw new CouldNotSaveException(__('Could not save Coupon Type: %1', $exception->getMessage()));
         }
 
         return (int)$model->getData(CouponSaleTypeInterface::ENTITY_ID);

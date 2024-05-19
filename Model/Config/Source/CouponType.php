@@ -37,15 +37,12 @@ class CouponType implements OptionSourceInterface
      */
     public function toOptionArray(): array
     {
-        $searchCriteria = $this->searchCriteriaBuilder
-            ->addFilter(CouponSaleTypeInterface::IS_ACTIVE, 1)
-        ->create();
-
-        $couponSaleTypes = $this->couponSaleTypeGetListQuery->execute($searchCriteria);
+        $couponSaleTypes = $this->couponSaleTypeGetListQuery->execute();
 
         return array_map(fn (CouponSaleTypeInterface $couponSaleType) => [
             'value' => $couponSaleType->getCode(),
-            'label' => $couponSaleType->getLabel()
+            'label' => $couponSaleType->getIsActive() ?
+                $couponSaleType->getLabel() : sprintf('%s (Inactive)', $couponSaleType->getLabel())
         ], $couponSaleTypes->getItems());
     }
 }

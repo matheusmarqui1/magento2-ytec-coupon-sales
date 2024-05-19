@@ -1,10 +1,22 @@
 <?php
+/**
+ * Copyright © 2024 Ytec. All rights reserved.
+ *
+ * @package    Ytec
+ * @moduleName CouponSales
+ * @author     Matheus Marqui <matheus.701@live.com>
+ */
+declare(strict_types=1);
 
 namespace Ytec\CouponSales\Model\Data;
 
 use Magento\Framework\DataObject;
 use Ytec\CouponSales\Api\Data\CouponSaleTypeInterface;
 
+/**
+ * Class CouponSaleTypeData
+ * @package Ytec\CouponSales\Model\Data
+ */
 class CouponSaleTypeData extends DataObject implements CouponSaleTypeInterface
 {
     /**

@@ -22,7 +22,7 @@ class CouponSaleTypeBlockActions extends CouponSaleBlockActions
     /**
      * Entity name.
      */
-    protected const ENTITY_NAME = 'Coupon Sale Type';
+    protected const ENTITY_NAME = 'Coupon Type';
 
     /**
      * Entity id field.

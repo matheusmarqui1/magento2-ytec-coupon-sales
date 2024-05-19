@@ -38,9 +38,9 @@ class Index extends BackendAction implements HttpGetActionInterface
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
 
         $resultPage->setActiveMenu('Ytec_CouponSales::type_management');
-        $resultPage->addBreadcrumb(__('Coupon Sale Type'), __('Coupon Sale Type'));
-        $resultPage->addBreadcrumb(__('Manage Coupon Sale Types'), __('Manage Coupon Sale Types'));
-        $resultPage->getConfig()->getTitle()->prepend(__('Coupon Sale Type List'));
+        $resultPage->addBreadcrumb(__('Coupon Type'), __('Coupon Type'));
+        $resultPage->addBreadcrumb(__('Manage Coupon Types'), __('Manage Coupon Types'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Coupon Type List'));
 
         return $resultPage;
     }

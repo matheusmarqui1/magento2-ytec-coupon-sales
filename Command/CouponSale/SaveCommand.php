@@ -243,6 +243,6 @@ class SaveCommand
         /** @var RuleInterface $rule */
         $rule = $this->ruleRepository->getById($relatedRuleId);
 
-        $model->setData(CouponSaleInterface::COUPON_TYPE_CODE, $rule->getCouponSaleCouponTypeCode());
+        $model->setData(CouponSaleInterface::COUPON_TYPE_CODE, $rule->getCouponTypeCode());
     }
 }

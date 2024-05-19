@@ -87,7 +87,7 @@ class Save extends BackendAction implements HttpPostActionInterface
             $entityModel->addData($params['general']);
             $this->saveCommand->execute($entityModel);
             $this->messageManager->addSuccessMessage(
-                __('The Coupon Sale Type data was saved successfully')
+                __('The Coupon Type data was saved successfully')
             );
             $this->dataPersistor->clear('entity');
         } catch (CouldNotSaveException $exception) {
@@ -96,6 +96,7 @@ class Save extends BackendAction implements HttpPostActionInterface
 
             return $resultRedirect->setPath('*/*/edit', [
                 CouponSaleTypeInterface::ENTITY_ID => $this->getRequest()->getParam(CouponSaleTypeInterface::ENTITY_ID)
+                    ?? $this->getRequest()->getParam(CouponSaleTypeInterface::ENTITY_ID)
             ]);
         }
 

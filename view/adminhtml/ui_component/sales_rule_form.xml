@@ -9,7 +9,79 @@
 */
 -->
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!--
+        Add a new switcherConfig to the field "coupon_type" in the sales rule form,
+        so we can hide or show the field "couponsale_coupon_type"
+    -->
     <fieldset name="rule_information">
+        <field name="coupon_type">
+            <settings>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <actions>
+                                <action name="3">
+                                    <target>sales_rule_form.sales_rule_form.rule_information.couponsale_coupon_type</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <actions>
+                                <action name="3">
+                                    <target>sales_rule_form.sales_rule_form.rule_information.couponsale_coupon_type</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="2">
+                            <actions>
+                                <action name="3">
+                                    <target>sales_rule_form.sales_rule_form.rule_information.couponsale_coupon_type</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                </switcherConfig>
+            </settings>
+        </field>
+        <!--
+            * Attention: Maybe a @todo here...
+            * This field besides the name "couponsale_coupon_type", it´s not related only to the coupon sales module
+              it's related to all coupons. Maybe in the future it should be moved to another module such as
+              Ytec_CustomCouponTypes or something like that.
+        -->
+        <field name="couponsale_coupon_type" sortOrder="6" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ytec\CouponSales\Model\Config\Source\CouponType</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">couponsale_coupon_type</item>
+                    <item name="default" xsi:type="string">default</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <label translate="true">Coupon Type</label>
+                <dataScope>couponsale_coupon_type</dataScope>
+                <tooltip>
+                    <description translate="true">
+                        <![CDATA[
+                            This is a <strong>custom field</strong> created by Ytec. It's used to define the type of coupon created within this rule.
+                            It will appear on the order endpoint and can be used for data purposes and processing.
+                            <strong>Modifying this field won't affect the existing coupons created previously.</strong>
+                        ]]>
+                    </description>
+                </tooltip>
+                <notice translate="true">
+                    Select the type of coupons created within this rule. Updating this field won't affect the existing coupons created previously.
+                    You can create a new coupon types in Marketing > Coupon Sales > Coupon Types.
+                </notice>
+            </settings>
+        </field>
         <fieldset name="partner_couponsale_sales" sortOrder="10">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -54,20 +126,6 @@
                     <dataScope>couponsale_coupon_template</dataScope>
                     <notice translate="true">{L} - letter, {D} - digit e.g. PROMO_{L}{L}{D}{D}{D} results in PROMO_DF627. Recommended code length is 20 symbols. This is used to validate the received code by the partner.
                     </notice>
-                </settings>
-            </field>
-            <field name="couponsale_coupon_type" sortOrder="20" formElement="select">
-                <argument name="data" xsi:type="array">
-                    <item name="options" xsi:type="object">Ytec\CouponSales\Model\Config\Source\CouponType</item>
-                    <item name="config" xsi:type="array">
-                        <item name="source" xsi:type="string">couponsale_coupon_type</item>
-                    </item>
-                </argument>
-                <settings>
-                    <dataType>text</dataType>
-                    <label translate="true">Coupon Sale Type</label>
-                    <dataScope>couponsale_coupon_type</dataScope>
-                    <notice translate="true">Select the type of coupons sales created within this rule. Updating this field won't affect the existing coupon sales created previously.</notice>
                 </settings>
             </field>
         </fieldset>

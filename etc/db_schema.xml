@@ -19,6 +19,9 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
+        <constraint xsi:type="unique" referenceId="YTEC_COUPONSALE_TYPE_CODE">
+            <column name="code"/>
+        </constraint>
         <index referenceId="YTEC_COUPONSALE_TYPE_ENTITY_ID" indexType="btree">
             <column name="entity_id"/>
         </index>
@@ -71,5 +74,8 @@
                 comment="Is Partner Sales Rule Column"/>
         <column xsi:type="varchar" name="couponsale_coupon_template" nullable="true" length="255" comment="CouponSale Coupon Template Column"/>
         <column xsi:type="varchar" name="couponsale_coupon_type" nullable="true" length="255" comment="CouponSale Coupon Type Column"/>
+    </table>
+    <table name="salesrule_coupon">
+        <column xsi:type="varchar" name="custom_coupon_type" nullable="true" length="255" comment="Custom Coupon Type Column"/>
     </table>
 </schema>

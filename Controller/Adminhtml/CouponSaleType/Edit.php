@@ -39,7 +39,7 @@ class Edit extends BackendAction implements HttpGetActionInterface
         /** @var Page $resultPage */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->setActiveMenu('Ytec_CouponSales::type_management');
-        $resultPage->getConfig()->getTitle()->prepend(__('Edit Coupon Sale Type'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Edit Coupon Type'));
 
         return $resultPage;
     }

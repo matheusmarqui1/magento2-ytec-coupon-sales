@@ -67,7 +67,7 @@ class Delete extends BackendAction implements HttpPostActionInterface, HttpGetAc
 
         try {
             $this->deleteByIdCommand->execute($entityId);
-            $this->messageManager->addSuccessMessage(__('You have successfully deleted Coupon Sale Type entity.'));
+            $this->messageManager->addSuccessMessage(__('You have successfully deleted Coupon Type entity.'));
         } catch (CouldNotDeleteException|NoSuchEntityException $exception) {
             $this->messageManager->addErrorMessage($exception->getMessage());
         }

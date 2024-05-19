@@ -39,7 +39,7 @@ class NewAction extends BackendAction implements HttpGetActionInterface
         /** @var Page $resultPage */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->setActiveMenu('Ytec_CouponSales::type_management');
-        $resultPage->getConfig()->getTitle()->prepend(__('New Coupon Sale Type'));
+        $resultPage->getConfig()->getTitle()->prepend(__('New Coupon Type'));
 
         return $resultPage;
     }

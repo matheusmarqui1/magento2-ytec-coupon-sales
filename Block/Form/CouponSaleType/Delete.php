@@ -37,7 +37,7 @@ class Delete extends GenericButton implements ButtonProviderInterface
             'delete',
             sprintf(
                 "deleteConfirm('%s', '%s')",
-                __('Are you sure you want to delete this coupon sale type?'),
+                __('Are you sure you want to delete this Coupon Type?'),
                 $this->getUrl(
                     '*/*/delete',
                     [CouponSaleTypeInterface::ENTITY_ID => $this->getEntityId()]

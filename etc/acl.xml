@@ -14,7 +14,7 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Ytec_CouponSales::management" title="Coupon Sale Management">
-                    <resource id="Ytec_CouponSales::type_management" title="Coupon Sale Type Management"/>
+                    <resource id="Ytec_CouponSales::type_management" title="Coupon Type Management"/>
                 </resource>
             </resource>
         </resources>

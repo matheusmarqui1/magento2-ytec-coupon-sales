@@ -10,19 +10,15 @@ declare(strict_types=1);
 
 namespace Ytec\CouponSales\Plugin;
 
-use Magento\Framework\DataObject;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\OrderExtensionFactory;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderSearchResultInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\SalesRule\Api\CouponRepositoryInterface;
 use Ytec\CouponSales\Api\CouponSaleRepositoryInterface;
-use Ytec\CouponSales\Api\Data\CouponSaleInterface;
-use Ytec\CouponSales\Api\Data\CouponSaleOrderInterface;
 use Ytec\CouponSales\Api\Data\CouponSaleOrderInterfaceFactory;
 use Ytec\CouponSales\Helper\ProductDiscountUsage;
-use Ytec\CouponSales\Model\CouponSaleModel;
-
+use Ytec\CouponSales\Helper\ExtendedCouponUsageOrderDetails;
 
 /**
  * Class AddCouponSaleDataToOrdersApi
@@ -31,41 +27,25 @@ use Ytec\CouponSales\Model\CouponSaleModel;
 class AddCouponSaleDataToOrdersApi
 {
     /**
-     * @var CouponSaleRepositoryInterface
-     */
-    private CouponSaleRepositoryInterface $couponSaleRepository;
-
-    /**
      * @var OrderExtensionFactory
      */
     private OrderExtensionFactory $orderExtensionFactory;
 
     /**
-     * @var CouponSaleOrderInterfaceFactory
+     * @var ExtendedCouponUsageOrderDetails
      */
-    private CouponSaleOrderInterfaceFactory $couponSaleOrderFactory;
+    private ExtendedCouponUsageOrderDetails $extendedCouponUsageOrderDetails;
 
     /**
-     * @var ProductDiscountUsage
-     */
-    private ProductDiscountUsage $productDiscountUsage;
-
-    /**
-     * @param CouponSaleRepositoryInterface $couponSaleRepository
      * @param OrderExtensionFactory $orderExtensionFactory
-     * @param CouponSaleOrderInterfaceFactory $couponSaleOrderFactory
-     * @param ProductDiscountUsage $productDiscountUsage
+     * @param ExtendedCouponUsageOrderDetails $extendedCouponUsageOrderDetails
      */
     public function __construct(
-        CouponSaleRepositoryInterface $couponSaleRepository,
         OrderExtensionFactory $orderExtensionFactory,
-        CouponSaleOrderInterfaceFactory $couponSaleOrderFactory,
-        ProductDiscountUsage $productDiscountUsage
+        ExtendedCouponUsageOrderDetails $extendedCouponUsageOrderDetails
     ) {
-        $this->couponSaleRepository = $couponSaleRepository;
         $this->orderExtensionFactory = $orderExtensionFactory;
-        $this->couponSaleOrderFactory = $couponSaleOrderFactory;
-        $this->productDiscountUsage = $productDiscountUsage;
+        $this->extendedCouponUsageOrderDetails = $extendedCouponUsageOrderDetails;
     }
 
     /**
@@ -73,32 +53,23 @@ class AddCouponSaleDataToOrdersApi
      * @param OrderRepositoryInterface $subject
      * @param OrderInterface $result
      * @return OrderInterface
-     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     public function afterGet(OrderRepositoryInterface $subject, OrderInterface $result): OrderInterface
     {
         if ($couponCode = $result->getCouponCode()) {
-            try {
-                /** @var CouponSaleInterface|CouponSaleModel $couponSale */
-                if ($couponSale = $this->couponSaleRepository->getCouponSaleByCode($couponCode)) {
-                    $orderExtensionAttributes = $result->getExtensionAttributes();
-                    if ($orderExtensionAttributes === null) {
-                        $orderExtensionAttributes = $this->orderExtensionFactory->create();
-                    }
-                    /** @var CouponSaleOrderInterface|DataObject $couponSale */
-                    $couponSale = $this->couponSaleOrderFactory->create()
-                        ->addData($couponSale->getData())
-                        ->setData(
-                            CouponSaleOrderInterface::PRODUCT_DISCOUNT_USAGE,
-                            $this->productDiscountUsage->execute($result, (int)$couponSale->getRuleId())
-                        );
-                    $orderExtensionAttributes->setCouponSale($couponSale);
-                    $result->setExtensionAttributes($orderExtensionAttributes);
-                }
-            } catch (NoSuchEntityException $exception) {
-                /** Not a couponsale order. */
-                return $result;
+            $orderExtensionAttributes = $result->getExtensionAttributes();
+
+            if ($orderExtensionAttributes === null) {
+                $orderExtensionAttributes = $this->orderExtensionFactory->create();
             }
+
+            $extendedCouponUsage = $this->extendedCouponUsageOrderDetails->build($result, $couponCode);
+
+            if ($extendedCouponUsage) {
+                $orderExtensionAttributes->setCouponUsage($extendedCouponUsage);
+            }
+
+            $result->setExtensionAttributes($orderExtensionAttributes);
         }
 
         return $result;
