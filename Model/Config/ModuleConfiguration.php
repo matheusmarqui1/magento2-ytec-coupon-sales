@@ -105,6 +105,15 @@ class ModuleConfiguration implements ModuleConfigurationInterface
      * {@inheritdoc}
      * @throws NoSuchEntityException
      */
+    public function getSalesIdExtractionErrorBehavior(): string
+    {
+        return $this->configurationManager->get(static::XML_PATH_SALES_ID_REGEX_EXTRACTION_ERROR_BEHAVIOR);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @throws NoSuchEntityException
+     */
     public function getImportRequiredFields(): array
     {
         $fields = $this->configurationManager->get(static::XML_PATH_IMPORT_REQUIRED_FIELDS);

@@ -27,6 +27,8 @@ interface ModuleConfigurationInterface
     public const XML_PATH_MAKE_AVAILABLE_ON_REFUND
         = 'ytec_couponsales/general/make_coupon_sale_available_on_refund';
     public const XML_PATH_SALES_ID_REGEX = 'ytec_couponsales/general/sales_id_regex';
+    public const XML_PATH_SALES_ID_REGEX_EXTRACTION_ERROR_BEHAVIOR =
+        'ytec_couponsales/general/sales_id_extraction_error_behavior';
     /**#@-*/
 
     /**#@+
@@ -81,6 +83,13 @@ interface ModuleConfigurationInterface
      * @return string
      */
     public function getSalesIdRegex(): string;
+
+    /**
+     * Get the sales ID extraction error behavior.
+     *
+     * @return string
+     */
+    public function getSalesIdExtractionErrorBehavior(): string;
 
     /**
      * Get the required fields for import.

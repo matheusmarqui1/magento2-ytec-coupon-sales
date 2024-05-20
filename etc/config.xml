@@ -9,6 +9,7 @@
                 <make_coupon_sale_available_on_refund>1</make_coupon_sale_available_on_refund>
                 <make_coupon_sale_available_on_cancel>1</make_coupon_sale_available_on_cancel>
                 <sales_id_regex>/\d{6}(?=\D*$)/</sales_id_regex>
+                <sales_id_extraction_error_behavior>throw_error</sales_id_extraction_error_behavior>
             </general>
             <import>
                 <required_fields>rule_id,code,status,partner_name,partner_sales_price</required_fields>

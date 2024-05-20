@@ -40,6 +40,11 @@
                     <label>Sales ID Regex</label>
                     <comment>Regex to extract the Sales ID sent by partner.</comment>
                 </field>
+                <field id="sales_id_extraction_error_behavior" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sales ID Extraction Error Behavior</label>
+                    <source_model>Ytec\CouponSales\Model\Config\Source\SalesIdExtractionErrorBehavior</source_model>
+                    <comment>Behavior to adopt when the Sales ID extraction fails (no matches for the regex).</comment>
+                </field>
             </group>
             <group id="import" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Import Configuration</label>
